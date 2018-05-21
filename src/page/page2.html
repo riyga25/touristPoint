@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Прогуляй стипендию</title>
+    <link rel='stylesheet' href='dist/style.css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<header class="header-page2">
+    <div class="container_header-page2">
+        <div class="left-column-page2">
+            <a href="/" class="header_title-page2">Прогуляй стипендию</a>
+            <label class="header-input-page2">
+                <span>Размер стипендии: </span><input type="text" id="form-color-page2"/>
+            </label>
+        </div>
+        <div class="right-column-page2">
+            <span class="input-sf-page2">&#8381</span>
+            <a href="" class="header-button-page2">Добавить место</a>
+        </div>
+    </div>
+</header>
+<main>
+    <div class="form-field-page2">
+
+        <div class="select-page2">
+            <select class="sss-page2" name="typeId">
+                <option>Бар</option>
+                <option>Кафе</option>
+                <option>Ресторан</option>
+                <option>Кинотеатр</option>
+            </select>
+        </div>
+    </div>
+    <div class="range-page2">
+        <script>
+            $( function() {
+                $( "#slider-range-page2" ).slider({
+                    range: true,
+                    min: 0,
+                    max: 100,
+                    values: [ 0, 100 ],
+                    slide: function( event, ui ) {
+                        $( "#amount" ).val(ui.values[ 0 ]+ "%" + " - " + ui.values[ 1 ] + "%" );
+                    }
+                });
+                $( "#amount" ).val($( "#slider-range-page2" ).slider( "values", 0 )+ "%" +
+                    " - " + $( "#slider-range-page2" ).slider( "values", 1 ) + "%");
+            } );
+        </script>
+
+        <div id="slider-range-page2"></div>
+    </div>
+    <div class="img-el-page2">
+        <label class="form-label-page2">Бар</label>
+        <div class="form-img-page2"><img src="1111.jpg" alt="bar"></div>
+    </div>
+
+    <div class="scrollbox-page2">
+        <ul>
+
+            <li><div class="block-maps-page2">
+                <p1>Бар Gonzo</p1>
+                <div class="star-rating">
+                    <div class="star-rating__wrap">
+                        <input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5" title="5 out of 5 stars"> (4 отзыва) </label>
+                        <input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4" title="4 out of 5 stars"></label>
+                        <input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3" title="3 out of 5 stars"></label>
+                        <input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2" title="2 out of 5 stars"></label>
+                        <input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1" title="1 out of 5 stars"></label>
+                    </div>
+
+                </div>
+                <p>Средний чек :1200р (60% стипендии)</p>
+                <p>Бар,улица Гончарова 48/2</p>
+                <div class="simvol-page2">
+                    <a href="#" class="pen-page2">&#9998;</a>
+                    <a href="#" class="box-page2">&#128465;</a>
+                </div>
+            </div></li>
+            <li><div class="block-maps1-page2">
+                <p1>Кафе Шуга</p1>
+                <div class="star-rating">
+                    <div class="star-rating__wrap">
+                        <input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5" title="5 out of 5 stars"> (4 отзыва) </label>
+                        <input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4" title="4 out of 5 stars"></label>
+                        <input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3" title="3 out of 5 stars"></label>
+                        <input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2" title="2 out of 5 stars"></label>
+                        <input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1" title="1 out of 5 stars"></label>
+                    </div>
+
+                </div>
+                <p>Средний чек :500р (60% стипендии)</p>
+                <p>Бар,улица Гончарова 45/2</p>
+                <div class="simvol-page2">
+                    <a href="#" class="pen-page2">&#9998;</a>
+                    <a href="#" class="box-page2">&#128465;</a>
+                </div>
+            </div></li>
+            <li><div class="block-maps2-page2">
+                <p1>Ресторан RMH</p1>
+                <div class="star-rating">
+                    <div class="star-rating__wrap">
+                        <input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5" title="5 out of 5 stars"> (4 отзыва) </label>
+                        <input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4" title="4 out of 5 stars"></label>
+                        <input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3" title="3 out of 5 stars"></label>
+                        <input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2" title="2 out of 5 stars"></label>
+                        <input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
+                        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1" title="1 out of 5 stars"></label>
+                    </div>
+
+                </div>
+                <p>Средний чек :1500р (60% стипендии)</p>
+                <p>Бар,улица Гончарова 48/2</p>
+                <div class="simvol-page2">
+                    <a href="#" class="pen-page2">&#9998;</a>
+                    <a href="#" class="box-page2">&#128465;</a>
+                </div>
+            </div></li>
+
+        </ul>
+    </div>
+    <a href="#" class="knopka-page2">Добавить место</a>
+    <div class="form1-page2">
+        <div class="form2-page2">
+            <label class="form-label-page2">Label</label>
+            <input class="input-page2" type="text" name="name" placeholder="placeholder">
+        </div>
+        <div class="form3-page2">
+            <label class="form-label-page2">Label:</label>
+            <input class="input-page2" type="text" name="name" placeholder="placeholder">
+        </div>
+    </div>
+<div class="center-el-page2">
+    <div class="star-rating">
+        <div class="star-rating__wrap">
+            <input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
+            <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5" title="5 out of 5 stars"></label>
+            <input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
+            <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4" title="4 out of 5 stars"></label>
+            <input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
+            <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3" title="3 out of 5 stars"></label>
+            <input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
+            <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2" title="2 out of 5 stars"></label>
+            <input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
+            <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1" title="1 out of 5 stars"></label>
+        </div>
+</div>
+</div>
+    <div class="otziv-page2">
+        <div class="star-right-page2">
+        <div class="star-rating">
+            <div class="star-rating__wrap">
+                <input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
+                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5" title="5 out of 5 stars"></label>
+                <input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
+                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4" title="4 out of 5 stars"></label>
+                <input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
+                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3" title="3 out of 5 stars"></label>
+                <input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
+                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2" title="2 out of 5 stars"></label>
+                <input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
+                <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1" title="1 out of 5 stars"></label>
+            </div>
+        </div>
+        </div>
+        <p>Destroyer666</p>
+        <div class="text-page2">
+        <p>Были с семьей в Ульяновске,
+            по отзывам пошли в <br>Gonzo, и не пожалели!!! Стейки улёт, соотношение<br> цены и качества - просто супер!!! Очень хороший<br> официант был у нас, человек своего дела, все показал,<br> рассказал, порекомендовал!!! По его рекомендации <br>попробовали очень вкусные салаты, просто супер!!! <br>Пиво вкусное!!! В общем, из всех заведений, что <br>посетили за время нашей поездки, это оказалось<br> лучшее!!!</p></div>
+    </div>
+
+
+</main>
+<footer class="footer-page2">
+    <a href="https://www.simbirsoft.com/" target="_blank">Simbirsoft</a>
+</footer>
+<body>
+<script type="text/javascript" src="dist/bundle.js"></script>
+</body>
+</html>

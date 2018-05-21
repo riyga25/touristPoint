@@ -1,0 +1,99 @@
+body{
+  font-family: 'Roboto Slab', serif;
+}
+.header{
+  background-color: #4296EA;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.header_title{
+  position: relative;
+  left: 104px;
+  Font-weight: Bold;
+  Font-Size: 22px;
+  Line-Height: 35px;
+  text-align: left;
+  color: #FFFFFF;
+}
+.header-input{
+  position: relative;
+  left: 144px;
+  Font-weight:regular;
+  Font-Size: 14px;
+  Line-Height: 20px;
+  text-align: Right;
+  color: #FFFFFF;
+}
+#form-color{
+  width:100px;
+  Font-weight: Bold;
+  Font-Size: 22px;
+  Line-Height: 35px;
+  text-align: Center;
+  color: #0073E6;
+}
+.header-button{
+  position: relative;
+  left:192px;
+  Font-Style: Regular;
+  Font-Size: 14px;
+  Line-Height: 20px;
+  text-align: Center;
+  color: #FFFFFF;
+}
+.container-inner{
+  position: relative;
+  top:8px;
+  left: 104px;
+  Font-weight: Bold;
+  Font-Size: 22px;
+  Line-Height: 35px;
+  Text-align:Left;
+  color: black;
+}
+.next{
+  position: relative;
+  top:40px;
+  Font-Style: Regular;
+  Font-Size: 14px;
+  Line-Height: 20px;
+  text-align: Left;
+  color: #828282;
+}
+.content{
+  Font-Style: Regular;
+  Font-Size: 14px;
+  Line-Height: 20px;
+  text-align: Left;
+  color: #828282;
+}
+.form-field{
+  position: relative;
+  top:40px;
+  left: 104px;
+  padding: 15px;
+}
+.form-label{
+  display: flex;
+}
+.input{
+  width: 369px;
+  height: 16px;
+}
+.form-button{
+  position: relative;
+  top:35px;
+  left: 350px;
+}
+.right-column1{
+  position: absolute;
+  left: 700px;
+  top:150px;
+}
+.right-column{
+  position: absolute;
+  left: 660px;
+  top:15px;
+  color: #FFFFFF;
+}
