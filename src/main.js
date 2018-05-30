@@ -1,5 +1,5 @@
 import Vue from 'vue/dist/vue';
-import App from './App.vue';
+import app from './app.vue';
 import router from './routing/router';
 import places from './assets/places.js';
 import 'normalize.css';
@@ -17,5 +17,5 @@ new Vue({
       places
     }
   },
-  render: h => h(App)
+  render: h => h(app)
 });
