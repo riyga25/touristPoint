@@ -5,7 +5,7 @@
          @mouseenter="switchControlsState"
          @mouseleave="switchControlsState"
     >
-        <shop-change :class="{ hidden: !controlsActive }">
+        <shop-change :placeId="place.id" :class="{ hidden: !controlsActive }">
         </shop-change>
         <div class="place-scroll__title">
           {{ place.name }}

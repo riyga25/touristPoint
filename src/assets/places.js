@@ -1,4 +1,4 @@
-export const places = [
+export default [
     {
         id: 1,
         name: 'RMH',

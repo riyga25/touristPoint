@@ -15,7 +15,7 @@
                 </div>
                 <div class="places">
                     <div class="places__map">
-                        <img src="../../assets/images/places-map.png">
+                        <img src="../assets/images/places-map.png">
                     </div>
                     <div class="places__scroll">
                         <div v-if="filteredPlaces.length">
@@ -34,9 +34,9 @@
 </template>
 
 <script>
-    import MainLocation from './Location/Main.vue';
-    import Filters from '../Filters.vue';
-    import Place from '../Place.vue';
+    import MainLocation from './pages/Location/Main.vue';
+    import Filters from './Filters.vue';
+    import Place from './Place.vue';
 
     export default {
         components: {

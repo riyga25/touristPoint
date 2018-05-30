@@ -5,39 +5,40 @@
                 <div class="nav">
                     <div>
                         <div class="nav__back">
-                            <v-link class="text-1" href="/">
-                              &laquo; Вернуться назад
-                            </v-link>
+                          <router-link to="/" class="text-1">&laquo; Вернуться к списку</router-link>
                         </div>
-                        <h3 class="nav__title text-2">
-                          Добавление места
-                        </h3>
+                      <h3 class="nav__title text-2">
+                          <template v-if="createButton">Добавление места</template>
+                          <template v-else-if="editButton">Редактирование места</template>
+                          <template v-else="editButton">Место не найдено</template>
+                      </h3>
                     </div>
                 </div>
             </div>
         </nav>
         <main>
-            <div class="container">
+            <div v-show="editButton || createButton" class="container">
                 <section>
                     <div class="content">
                         <form class="content__form">
                             <label class="text-1" for="name">
                               Название:
                             </label>
-                            <input type="text" name="name" id="name" placeholder="Введите название">
+                          <input v-model="place && place.name" type="text" name="name" id="name" placeholder="Введите название места">
                             <label class="text-1" for="address">
                               Адрес:
                             </label>
-                          <input type="text" name="address" id="address" placeholder="Введите адрес">
+                          <input v-model="place && place.address" type="text" name="address" id="address" placeholder="Введите точный адрес места">
                             <label class="text-1" for="average-check">
                               Средний чек:
                             </label>
-                          <input type="number" name="average_check" id="average-check"
-                                   placeholder="Введите значение." min="1" step="0.01">
-                            <label class="text-1" for="category">
+                          <input v-model="place && place.averageCheck" type="number" name="average_check" id="average-check"
+                                 placeholder="Введите размер среднего чека, руб." min="1" step="0.01">
+
+                          <label class="text-1" for="category">
                               Категория:
                             </label>
-                            <select name="category" id="category">
+                          <select v-model="place && place.category && place.category.id" name="category" id="category">
                                 <option value="kino">
                                   Кинотеатр
                                 </option>
@@ -51,22 +52,25 @@
                                   Ресторан
                                 </option>
                             </select>
+
+
                             <label class="text-1" for="photo">
                               Фото:
                             </label>
                           <input type="text" name="photo_url"
                                    value="https://www.google.ru/search?q=%D0%B1%D0%B0%D1%80&newwindow=1&source=lnms&tbm=isch&sa=X&ved=0ahUKEwispsy5laTbAhXBoCwKHUxICLcQ_AUICygC&biw=1707&bih=819&dpr=1.13#imgrc=ruI0T8Avv2Dk4M:"
                                    disabled><input type="file" name="photo" id="photo" accept="image/*">
-                            <img src="../../assets/images/bar.jpeg">
+                            <img src="../assets/images/bar.jpeg">
                             <v-submit class="text-1">
-                              Добавить
+                              <template v-if="createButton">Добавить</template>
+                              <template v-else-if="editButton">Сохранить</template>
                             </v-submit>
                         </form>
                         <div class="content__map">
                             <span class="content__map_title text-1">
                               Укажите место на карте:
                             </span>
-                            <img src="../../assets/images/places-map.png">
+                            <img src="../assets/images/places-map.png">
                         </div>
                     </div>
                 </section>
@@ -78,11 +82,23 @@
 </template>
 
 <script>
-    import MainLocation from './Location/Main.vue';
+    import MainLocation from './pages/Location/Main.vue';
     export default {
         components: {
             MainLocation
+        },
+      computed: {
+        place() {
+          return this.$root.places.find(place => place.id == this.$route.params.id);
+        },
+        createButton() {
+          return !this.$route.params.id;
+        },
+        editButton() {
+          return this.$route.params.id && this.place;
         }
+      }
+
     }
 </script>
 

@@ -19,9 +19,7 @@
                     &#x20bd;
                 </div>
                 <div class="header__right-link">
-                    <v-link class="text-1" href="/place/edit">
-                      Добавить место
-                    </v-link>
+                  <router-link to="/place/create" class="text-1">Добавить место</router-link>
                 </div>
             </div>
         </div>
