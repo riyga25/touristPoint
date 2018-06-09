@@ -6,68 +6,68 @@ export default [
             name: 'Ресторан',
             id: 2
         },
-        averageCheck: 1500,
-        address: 'Дворцовая, 10',
+        averageCheck: 2000,
+        address: 'Гончарова,б20',
         review: [
             {
                 id: 3,
-                rating: 3.5,
-                author: 'aaa',
-                text: 'Lorem ipsum dolor sit amet',
-            },
-            {
-                id: 2,
-                rating: 5,
-                author: 'bbb',
+                star: 3.5,
+                author: 'user_name_111',
                 text: 'Lorem ipsum dolor sit amet',
             },
           {
-            id: 4,
-            rating: 3.5,
-            author: 'ccc',
+            id: 1,
+            star: 5,
+            author: 'user_name_111',
             text: 'Lorem ipsum dolor sit amet',
           },
           {
-            id: 6,
-            rating: 5,
-            author: 'ddd',
+            id: 10,
+            star: 5,
+            author: 'user_name_111',
             text: 'Lorem ipsum dolor sit amet',
           },
           {
             id: 8,
-            rating: 4,
-            author: 'iii',
+            star: 3.5,
+            author: 'user_name_111',
             text: 'Lorem ipsum dolor sit amet',
-          }
+          },
+            {
+                id: 2,
+                star: 5,
+                author: 'user_name_222',
+                text: 'Lorem ipsum dolor sit amet',
+            }
         ]
     },
     {
         id: 2,
-        name: 'Макдональдс',
+        name: 'Day&Night',
         category: {
-            name: 'Кафе',
+            name: 'Ресторан',
             id: 1
         },
         averageCheck: 500,
-        address: 'Гончарова, 21А',
+        address: 'Московское шоссе, 50',
         review: [
             {
                 id: 33,
-                rating: 3,
-                author: 'fff',
+                star: 3,
+                author: 'user_name_111',
                 text: 'Lorem ipsum dolor sit amet',
             },
             {
                 id: 33,
-                rating: 4,
-                author: 'jjj',
+                star: 4,
+                author: 'user_name_111',
                 text: 'Lorem ipsum dolor sit amet',
             },
         ]
     },
     {
         id: 3,
-        name: 'Day&Night',
+        name: 'Miruki',
         category: {
             name: 'Ресторан',
             id: 2
@@ -75,25 +75,25 @@ export default [
         review: [
             {
                 id: 33,
-                rating: 3.5,
-                author: 'hhh',
+                star: 3.5,
+                author: 'user_name_111',
                 text: 'Lorem ipsum dolor sit amet',
             },
             {
                 id: 24,
-                rating: 5,
-                author: 'rrr',
+                star: 5,
+                author: 'user_name_222',
                 text: 'Lorem ipsum dolor sit amet',
             },
             {
                 id: 35,
-                rating: 5,
-                author: 'sss',
+                star: 5,
+                author: 'user_name_111',
                 text: 'Lorem ipsum dolor sit amet',
             },
         ],
-        averageCheck: 2000,
-        address: 'Московское шоссе, 100Б'
+        averageCheck: 3000,
+        address: 'Минаева, 10'
     },
     {
         id: 4,
@@ -107,8 +107,8 @@ export default [
         review: [
             {
                 id: 33,
-                rating: 2,
-                author: 'ooo',
+                star: 2,
+                author: 'user_name_111',
                 text: 'Lorem ipsum dolor sit amet',
             }
         ]
@@ -125,14 +125,14 @@ export default [
         review: [
             {
                 id: 33,
-                rating: 4.6,
-                author: 'qqq',
+                star: 4.6,
+                author: 'user_name_111',
                 text: 'Lorem ipsum dolor sit amet',
             },
             {
                 id: 33,
-                rating: 4.3,
-                author: 'ttt',
+                star: 4.3,
+                author: 'user_name_111',
                 text: 'Lorem ipsum dolor sit amet',
             },
         ]
@@ -149,14 +149,14 @@ export default [
         review: [
             {
                 id: 33,
-                rating: 4.5,
-                author: 'yyy',
+                star: 4.5,
+                author: 'user_name_111',
                 text: 'Lorem ipsum dolor sit amet',
             },
             {
                 id: 33,
-                rating: 5,
-                author: 'iii',
+                star: 5,
+                author: 'user_name_111',
                 text: 'Lorem ipsum dolor sit amet',
             },
         ],
@@ -168,13 +168,13 @@ export default [
             name: 'Кинотеатр',
             id: 3
         },
-        averageCheck: 150,
-        address: 'Карла Маркса, 4А',
+        averageCheck: 100,
+        address: 'Радищева,30',
         review: [
             {
                 id: 33,
-                rating: 1.4,
-                author: 'xxx',
+                star: 1.4,
+                author: 'user_name_111',
                 text: 'Lorem ipsum dolor sit amet',
             }
         ]

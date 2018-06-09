@@ -1,6 +1,6 @@
 <template>
-    <span class="rating">
-        <span :style="{ 'width': ratingPercent + '%' }" class="rating__actual"></span>
+    <span class="star">
+        <span :style="{ 'width': ratingPercent + '%' }" class="star__1"></span>
     </span>
 </template>
 
@@ -20,7 +20,7 @@
 </script>
 
 <style lang="scss" scoped>
-    .rating {
+    .star {
         display: inline-block;
         width: 80px;
         height: 16px;
@@ -28,7 +28,7 @@
         margin-right: 8px;
     }
 
-    .rating__actual {
+    .star__1 {
         display: inline-block;
         height: 16px;
         background: url('../assets/images/star2.png') repeat-x;

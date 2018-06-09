@@ -6,20 +6,16 @@
                   Прогуляй стипендию!
                 </h2>
                 <div class="header__stipend-size">
-                    <label class="text-1" for="stipend-size">
+                    <label class="text-1">
                       Размер стипендии:
                     </label>
-                    <input
-                        class="text-2"
-                        type="text"
-                        name="stipend_size"
-                        id="stipend-size"
-                        v-model="$root.stipendSize"
-                    >
+                    <input class="text-2" v-model="stipend">
                     &#x20bd;
                 </div>
                 <div class="header__right-link">
-                  <router-link to="/place/create" class="text-1">Добавить место</router-link>
+                    <router-link to="/place/create" class="text-1">
+                      Добавить место
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -28,6 +24,16 @@
 
 <script>
     export default {
+        computed: {
+            stipend: {
+                get() {
+                    return this.$store.getters.stipend;
+                },
+                set(value) {
+                    this.$store.dispatch('setStipend', value);
+                }
+            }
+        }
     }
 </script>
 

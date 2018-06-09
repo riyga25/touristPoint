@@ -5,46 +5,33 @@
          @mouseenter="switchControlsState"
          @mouseleave="switchControlsState"
     >
-        <shop-change :placeId="place.id" :class="{ hidden: !controlsActive }">
-        </shop-change>
-        <div class="place-scroll__title">
-          {{ place.name }}
-        </div>
+        <place-change :placeId="place.id" :class="{ hidden: !controlsActive }"></place-change>
+        <div class="place-scroll__title">{{ place.name }}</div>
         <div class="place-scroll__reviews">
-            <star
-              class="text-1" :value="rating">
-            </star>
-            <span
-              class="text-1">(Отзывов: {{ reviewNumber }})
+            <star class="text-1" :value="star"></star>
+            <span class="text-1">(Отзывов: {{ reviewNumber }})</span>
+        </div>
+        <div>
+            <span class="text-1">Средний чек:</span>
+            <span class="place-scroll__average-check">{{ place.averageCheck }} &#x20bd; ({{ percentOfStipend }})
             </span>
         </div>
         <div>
-            <span class="text-1">
-              Средний чек:
-            </span>
-            <span class="place-scroll__average-check">
-              {{ place.averageCheck }} &#x20bd; ({{ percentOfStipend }})
-            </span>
-        </div>
-        <div>
-            <span class="text-1">
-              {{ place.category ? place.category.name : '' }}
-            </span>,
-            <span class="place-item__address text-1">
-              {{ place.address }}
-            </span>
+            <span class="text-1">{{ place.category ? place.category.name : '' }}</span>,
+            <span class="place-scroll__address text-1">{{ place.address }}</span>
         </div>
     </div>
 </template>
 
 <script>
-    import ShopChange from './ShopChange.vue';
+    import PlaceChange from './PlaceChange.vue';
     import Star from './Star.vue';
+    import { mapGetters } from 'vuex';
 
     export default {
         components: {
-          ShopChange,
-          Star
+            PlaceChange,
+            Star
         },
         props: {
             place: {
@@ -59,26 +46,28 @@
             }
         },
         computed: {
-            rating() {
-                let rating = 0;
-                let reviews = this.place.review;
-                if (reviews) {
-                    reviews.forEach(function(review) {
-                        rating += review.rating;
-                    });
-                    rating /= reviews.length;
-                }
-                return rating;
-            }, reviewNumber() {return this.place.review ? this.place.review.length : 0;
-            }, percentOfStipend() {
-                let value = (this.place.averageCheck / parseFloat(this.$root.stipendSize)) * 100;
+            ...mapGetters([
+                'getPlaceStar',
+                'getPlacePercentOfStipend',
+                'getPlaceReviewNumber'
+            ]),
+            percentOfStipend() {
+                let percentOfStipend = this.getPlacePercentOfStipend(this.place);
 
-                return isFinite(value) ? value.toFixed() + '% стипендии' : 'Error';
+                return isFinite(percentOfStipend) ? percentOfStipend + '% стипендии' : 'Error'
+            },
+            star() {
+                return this.getPlaceStar(this.place);
+            },
+            reviewNumber() {
+                return this.getPlaceReviewNumber(this.place);
             }
         },
         methods: {
-            switchControlsState() {this.controlsActive = !this.controlsActive;
-            }, switchItemState() {
+            switchControlsState() {
+                this.controlsActive = !this.controlsActive;
+            },
+            switchItemState() {
                 this.itemActive = !this.itemActive;
             }
         }
@@ -99,7 +88,7 @@
         cursor: pointer;
 
         &:hover {
-            border: 1px solid blueviolet;
+            border: 1px solid #BDBDBD;
         }
     }
 
@@ -114,7 +103,7 @@
         margin-bottom: 8px;
     }
 
-    .place-scroll__average-check, .place-item__address {
+    .place-scroll__average-check, .place-scroll__address {
         color: #333333;
     }
 
@@ -146,6 +135,6 @@
     }
 
     .active:hover:before {
-        border-right-color: blueviolet;
+        border-right-color: #BDBDBD;
     }
 </style>

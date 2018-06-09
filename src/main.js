@@ -1,21 +1,16 @@
 import Vue from 'vue/dist/vue';
 import App from './App.vue';
 import router from './routing/router';
-import places from './assets/places.js';
+import store from './store';
 import 'normalize.css';
 import './assets/styles/main.scss';
 
-import Sub from './components/Sub.vue';
-Vue.component('v-submit', Sub);
+import Submit from './components/Submit.vue';
+Vue.component('v-submit', Submit);
 
 new Vue({
-  el: '#app',
-  router,
-  data() {
-    return {
-      stipendSize: 2000,
-      places
-    }
-  },
-  render: h => h(App)
+    el: '#app',
+    router,
+    store,
+    render: h => h(App)
 });

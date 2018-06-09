@@ -1,33 +1,38 @@
 <template>
-    <main-location>
-      <div class="no-page">
-        <div class="no-page__back">
-          <router-link to="/">&laquo; Вернуться на главную страницу</router-link>
+    <main-position>
+        <div class="not-found">
+            <div class="not-found__back">
+                <router-link to="/">&laquo; Вернуться на главную страницу</router-link>
+            </div>
         </div>
-      </div>
-    </main-location>
+    </main-position>
 </template>
 
 <script>
-    import MainLocation from './pages/Location/Main.vue';
+    import MainPosition from './pages/Positions/Main.vue';
 
     export default {
         components: {
-            MainLocation
+            MainPosition
         }
     }
 </script>
+
 <style lang="scss" scoped>
-  .no-page {
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-  }
-
-  .no-page__back {
-    margin: 0 0 20px 0;
-
-    a {
-      color: #0073E6;
+    .not-found {
+        font-family: 'Roboto', sans-serif;
+        text-align: center;
     }
-  }
+
+    .not-found__image {
+        margin: 20px 0 20px 0;
+    }
+
+    .not-found__back {
+        margin: 0 0 20px 0;
+
+        a {
+            color: #0073E6;
+        }
+    }
 </style>

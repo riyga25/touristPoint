@@ -8,35 +8,42 @@
                             <router-link to="/" class="text-1">&laquo; Вернуться к списку</router-link>
                         </div>
                         <h3 class="nav__title text-2">
-                            <template v-if="place">Редактирование места</template>
-                            <template v-else>Место не найдено</template>
+                            <template>Добавление места</template>
                         </h3>
                     </div>
                 </div>
             </div>
         </nav>
         <main>
-            <div v-show="place" class="container">
+            <div class="container">
                 <section>
                     <div class="content">
                         <form class="content__form">
                             <label class="text-1" for="name">Название:</label>
-                            <input v-model="place && place.name" type="text" name="name" id="name" placeholder="Введите название места">
+                            <input v-model="place.name" type="text" name="name" id="name" placeholder="Введите название">
 
-                            <label class="text-1" for="address">Адрес:</label>
-                            <input v-model="place && place.address" type="text" name="address" id="address" placeholder="Введите точный адрес места">
+                            <label class="text-1" for="address">
+                              Адрес:
+                            </label>
+                            <input v-model="place.address" type="text" name="address" id="address" placeholder="Введите адрес">
 
-                            <label class="text-1" for="average-check">Средний чек:</label>
-                            <input v-model="place && place.averageCheck" type="number" name="average_check" id="average-check"
+                            <label class="text-1" for="average-check">
+                              Средний чек:
+                            </label>
+                            <input v-model="place.averageCheck" type="number" name="average_check" id="average-check"
                                    placeholder="Введите размер среднего чека, руб." min="1" step="0.01">
 
-                            <label class="text-1">Категория:</label>
-                            <select v-model="place && place.category">
+                            <label class="text-1">
+                              Категория:
+                            </label>
+                            <select v-model="place.category">
                                 <option></option>
                                 <option v-for="category in categories" :value="{ id: category.id, name: category.name }">{{ category.name }}</option>
                             </select>
 
-                            <label class="text-1" for="photo">Фото:</label>
+                            <label class="text-1" for="photo">
+                              Фото:
+                            </label>
                             <input type="text" name="photo_url"
                                    value="http://photo-bar.com"
                                    disabled>
@@ -44,10 +51,14 @@
 
                             <img src="../assets/images/bar.jpeg">
 
-                            <button class="text-1" type="submit" @click.prevent="savePlace">Сохранить</button>
+                            <button class="text-1" type="submit" @click.prevent="createPlace">
+                              Добавить
+                            </button>
                         </form>
                         <div class="content__map">
-                            <span class="content__map_title text-1">Укажите место на карте:</span>
+                            <span class="content__map_title text-1">
+                              Укажите место на карте:
+                            </span>
                             <img src="../assets/images/places-map.png">
                         </div>
                     </div>
@@ -65,17 +76,31 @@
         components: {
             MainPosition
         },
+        data() {
+            return {
+                place: {
+                    id: null,
+                    name: '',
+                    address: '',
+                    averageCheck: 0,
+                    category: {
+                        id: null,
+                        name: ''
+                    }
+                }
+            }
+        },
         computed: {
             ...mapGetters([
                 'categories',
-                'getPlaceById'
-            ]),
-            place() {
-                return this.getPlaceById(this.$route.params.id);
-            }
+                'getNewPlaceId'
+            ])
         },
         methods: {
-            savePlace() {
+            createPlace()
+            {
+                this.place.id = this.getNewPlaceId;
+                this.$store.dispatch('createPlace', this.place);
                 this.$router.push('/');
             }
         }
@@ -118,48 +143,48 @@
         margin-right: 30px;
         width: 400px;
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
+    label {
+        display: block;
+        margin-bottom: 8px;
+    }
 
-        input, select {
-            padding: 8px 15px 8px 16px;
-            margin-bottom: 24px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 14px;
-        }
+    input, select {
+        padding: 8px 15px 8px 16px;
+        margin-bottom: 24px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+    }
 
-        button {
-            padding: 10px;
-            color: #fff;
-            background: #0073E6;
-            border: none;
-            cursor: pointer;
-        }
+    button {
+        padding: 10px;
+        color: #fff;
+        background: #0073E6;
+        border: none;
+        cursor: pointer;
+    }
 
-        img {
-            box-sizing: border-box;
-            width: 400px;
-            border: 1px solid #BDBDBD;
-            padding: 8px;
-            margin-bottom: 24px;
-        }
+    img {
+        box-sizing: border-box;
+        width: 400px;
+        border: 1px solid #BDBDBD;
+        padding: 8px;
+        margin-bottom: 24px;
+    }
 
-        #photo {
-            display: none;
-        }
+    #photo {
+        display: none;
+    }
     }
 
     .content__map {
         display: flex;
         flex-direction: column;
 
-        img {
-            flex: 1;
-            width: 816px;
-            border: 1px solid #E0E0E0;
-        }
+    img {
+        flex: 1;
+        width: 816px;
+        border: 1px solid #E0E0E0;
+    }
     }
 
     .content__map_title {

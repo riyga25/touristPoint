@@ -2,7 +2,7 @@
     <footer>
         <div class="container">
             <div class="footer">
-              <span class="text-1"><a href="https://www.simbirsoft.com/"> SimbirSoft, 2018</a></span>
+              <span class="text-1">&copy;<a href="www.simbirsoft.com/"> SimbirSoft, 2018</a></span>
             </div>
         </div>
     </footer>

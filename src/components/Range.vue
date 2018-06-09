@@ -1,7 +1,16 @@
 <template>
     <div>
         <vue-range
-            :bgStyle="bgStyle" :processStyle="processStyle" :sliderStyle="sliderStyle" :height="height" :dotWidth="dotWidth" :dotHeight="dotHeight" :tooltip="tooltip" :value="value" @input="$emit('input', $event)" @drag-end="$emit('drag-end');"
+            :bgStyle="bgStyle"
+            :processStyle="processStyle"
+            :sliderStyle="sliderStyle"
+            :height="height"
+            :dotWidth="dotWidth"
+            :dotHeight="dotHeight"
+            :tooltip="tooltip"
+            :value="value"
+            @input="$emit('input', $event)"
+            @drag-end="$emit('drag-end')"
         >
         </vue-range>
     </div>
@@ -14,7 +23,7 @@
         components: {
             vueRange
         },
-        data () {
+        data() {
             return {
                 value: [0, 100],
                 tooltip: false,
