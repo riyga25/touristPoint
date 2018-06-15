@@ -5,11 +5,11 @@
         </template>
 
         <template slot="body">
-            Вы точно хотите его удалить?
+            удалить место?
         </template>
 
         <template slot="footer">
-            <button class="button btn-accept" @click="Delete">
+            <button class="button btn-accept" @click.stop="Delete">
               Удалить
             </button>
         </template>

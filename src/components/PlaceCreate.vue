@@ -19,13 +19,15 @@
                 <section>
                     <div class="content">
                         <form class="content__form">
-                            <label class="text-1" for="name">Название:</label>
+                            <label class="text-1" for="name">
+                              Название:
+                            </label>
                             <input v-model="place.name" type="text" name="name" id="name" placeholder="Введите название">
 
                             <label class="text-1" for="address">
                               Адрес:
                             </label>
-                            <input v-model="place.address" type="text" name="address" id="address" placeholder="Введите адрес">
+                            <input v-model="place.address" type="text" name="address" id="address" placeholder="Введите адрес ">
 
                             <label class="text-1" for="average-check">
                               Средний чек:
@@ -59,7 +61,10 @@
                             <span class="content__map_title text-1">
                               Укажите место на карте:
                             </span>
-                            <img src="../assets/images/places-map.png">
+                            <yandex-map class="content__map_body"
+                                :width="'816px'" :height="'100%'" :clickable="true" @map-clicked="addMarker" ref="map"
+                            >
+                            </yandex-map>
                         </div>
                     </div>
                 </section>
@@ -69,12 +74,14 @@
 </template>
 
 <script>
-    import MainPosition from './pages/Positions/Main.vue';
+    import MainPosition from './pages/Position/Main.vue';
+    import YandexMap from './Map';
     import { mapGetters } from 'vuex';
 
     export default {
         components: {
-            MainPosition
+            MainPosition,
+            YandexMap
         },
         data() {
             return {
@@ -86,22 +93,24 @@
                     category: {
                         id: null,
                         name: ''
-                    }
+                    },
+                    coords: []
                 }
             }
         },
         computed: {
-            ...mapGetters([
-                'categories',
-                'getNewPlaceId'
-            ])
+            ...mapGetters(['categories', 'getNewPlaceId'])
         },
         methods: {
-            createPlace()
-            {
+            createPlace() {
                 this.place.id = this.getNewPlaceId;
                 this.$store.dispatch('createPlace', this.place);
                 this.$router.push('/');
+            },
+            addMarker(coords) {
+                this.place.coords = coords;
+                this.$refs.map.clearMap();
+                this.$refs.map.addMarker(this.place);
             }
         }
     }
@@ -179,15 +188,14 @@
     .content__map {
         display: flex;
         flex-direction: column;
-
-    img {
-        flex: 1;
-        width: 816px;
-        border: 1px solid #E0E0E0;
-    }
     }
 
     .content__map_title {
         margin-bottom: 8px;
+    }
+
+    .content__map_body {
+        flex: 1;
+        border: 1px solid #E0E0E0;
     }
 </style>

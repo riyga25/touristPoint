@@ -1,6 +1,6 @@
 <template>
     <span class="star">
-        <span :style="{ 'width': ratingPercent + '%' }" class="star__1"></span>
+        <span :style="{ 'width': ratingPercent + '%' }" class="star1"></span>
     </span>
 </template>
 
@@ -28,7 +28,7 @@
         margin-right: 8px;
     }
 
-    .star__1 {
+    .star1 {
         display: inline-block;
         height: 16px;
         background: url('../assets/images/star2.png') repeat-x;

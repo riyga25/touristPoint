@@ -1,32 +1,35 @@
 import Vue from 'vue/dist/vue';
 import Vuex from 'vuex';
 import places from './assets/places';
-
+import map from './map';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+    modules: {
+        map
+    },
     state: {
         stipend: 2000,
         places,
-        categories:[
-          {
-            id: 1,
-            name: 'Кафе'
-          },
-          {
-            id: 2,
-            name: 'Ресторан'
-          },
-          {
-            id: 3,
-            name: 'Кинотеатр'
-          },
-          {
-            id: 4,
-            name: 'Бар'
-          }
-        ]
+      categories:[
+        {
+          id: 1,
+          name: 'Кафе'
+        },
+        {
+          id: 2,
+          name: 'Ресторан'
+        },
+        {
+          id: 3,
+          name: 'Кинотеатр'
+        },
+        {
+          id: 4,
+          name: 'Бар'
+        }
+      ]
     },
     actions: {
         setStipend(context, stipend) {
@@ -40,48 +43,38 @@ export default new Vuex.Store({
         }
     },
     mutations: {
-        setStipend(state, stipend)
-        {
+        setStipend(state, stipend) {
             state.stipend = stipend;
         },
-        createPlace(state, place)
-        {
+        createPlace(state, place) {
             state.places.push(place);
         },
-        deletePlaceById(state, id)
-        {
+        deletePlaceById(state, id) {
             state.places = state.places.filter(place => place.id != id);
-        },
+        }
     },
     getters: {
-        stipend: state =>
-        {
+        stipend: state => {
             return state.stipend;
         },
-        categories: state =>
-        {
+        categories: state => {
             return state.categories;
         },
         places: state => {
             return state.places;
         },
-        Places2: state =>
-        {
+        Places2: state => {
             return state.places.length;
         },
-        getPlaceById: (state, getters) => placeId =>
-        {
+        getPlaceById: (state, getters) => placeId => {
             return getters.places.find(place => place.id == placeId);
         },
-        getPlaceStar: state => place =>
-        {
+        getPlaceStar: state => place => {
             let rating = 0;
             let reviews = place.review;
 
-            if (reviews)
-            {
-                reviews.forEach(review =>
-                {
+            if (reviews) {
+                reviews.forEach(review => {
                     rating += review.star;
                 });
 
@@ -90,27 +83,16 @@ export default new Vuex.Store({
 
             return rating;
         },
-        getPlacePercentOfStipend: state => place =>
-
-        {
-            return Math.round(place.averageCheck / parseFloat(state.stipend) * 100);
+        getPlacePercentOfStipend: state => place => {
+            return place ? Math.round(place.averageCheck / parseFloat(state.stipend) * 100) : 0;
         },
-
-
-        getPlaceReviewNumber: state => place =>
-
-        {
-            return place.review ? place.review.length : 0;
+        getPlaceReviewNumber: state => place => {
+            return place && place.review ? place.review.length : 0;
         },
-
-        getNewPlaceId: (state, getters) =>
-        {
-
+        getNewPlaceId: (state, getters) => {
             let maxPlaceId = Math.max(...getters.places.map(place => place.id), 0);
 
             return ++maxPlaceId;
-
         }
-    },
-    modules: {}
+    }
 });

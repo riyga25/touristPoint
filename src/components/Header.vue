@@ -26,7 +26,8 @@
     export default {
         computed: {
             stipend: {
-                get() {
+                get()
+                {
                     return this.$store.getters.stipend;
                 },
                 set(value) {

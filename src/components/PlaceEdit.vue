@@ -1,15 +1,21 @@
 <template>
-    <main-position>
+    <main-posistion>
         <nav>
             <div class="container">
                 <div class="nav">
                     <div>
                         <div class="nav__back">
-                            <router-link to="/" class="text-1">&laquo; Вернуться к списку</router-link>
+                            <router-link to="/" class="text-1">
+                              &laquo; Вернуться к списку
+                            </router-link>
                         </div>
                         <h3 class="nav__title text-2">
-                            <template v-if="place">Редактирование места</template>
-                            <template v-else>Место не найдено</template>
+                            <template v-if="place">
+                              Редактирование места
+                            </template>
+                            <template v-else>
+                              Место не найдено
+                            </template>
                         </h3>
                     </div>
                 </div>
@@ -20,23 +26,33 @@
                 <section>
                     <div class="content">
                         <form class="content__form">
-                            <label class="text-1" for="name">Название:</label>
-                            <input v-model="place && place.name" type="text" name="name" id="name" placeholder="Введите название места">
+                            <label class="text-1" for="name">
+                              Название:
+                            </label>
+                            <input v-model="place && place.name" type="text" name="name" id="name" placeholder="Введите название">
 
-                            <label class="text-1" for="address">Адрес:</label>
-                            <input v-model="place && place.address" type="text" name="address" id="address" placeholder="Введите точный адрес места">
+                            <label class="text-1" for="address">
+                              Адрес:
+                            </label>
+                            <input v-model="place && place.address" type="text" name="address" id="address" placeholder="Введите адрес">
 
-                            <label class="text-1" for="average-check">Средний чек:</label>
+                            <label class="text-1" for="average-check">
+                              Средний чек:
+                            </label>
                             <input v-model="place && place.averageCheck" type="number" name="average_check" id="average-check"
                                    placeholder="Введите размер среднего чека, руб." min="1" step="0.01">
 
-                            <label class="text-1">Категория:</label>
+                            <label class="text-1">
+                              Категория:
+                            </label>
                             <select v-model="place && place.category">
                                 <option></option>
                                 <option v-for="category in categories" :value="{ id: category.id, name: category.name }">{{ category.name }}</option>
                             </select>
 
-                            <label class="text-1" for="photo">Фото:</label>
+                            <label class="text-1" for="photo">
+                              Фото:
+                            </label>
                             <input type="text" name="photo_url"
                                    value="http://photo-bar.com"
                                    disabled>
@@ -47,28 +63,33 @@
                             <button class="text-1" type="submit" @click.prevent="savePlace">Сохранить</button>
                         </form>
                         <div class="content__map">
-                            <span class="content__map_title text-1">Укажите место на карте:</span>
-                            <img src="../assets/images/places-map.png">
+                            <span class="content__map_title text-1">
+                              Укажите место на карте:
+                            </span>
+                                <yandex-map class="content__map_body"
+                                    :width="'816px'" :height="'100%'" :places="[place]" :center="place.coords" :zoom="15"
+                                >
+                                </yandex-map>
                         </div>
                     </div>
                 </section>
             </div>
         </main>
-    </main-position>
+    </main-posistion>
 </template>
 
 <script>
-    import MainPosition from './pages/Positions/Main.vue';
+    import MainPosition from './pages/Position/Main.vue';
+    import YandexMap from './Map';
     import { mapGetters } from 'vuex';
 
     export default {
         components: {
-            MainPosition
+            MainPosition, YandexMap
         },
         computed: {
             ...mapGetters([
-                'categories',
-                'getPlaceById'
+                'categories', 'getPlaceById'
             ]),
             place() {
                 return this.getPlaceById(this.$route.params.id);
@@ -154,15 +175,14 @@
     .content__map {
         display: flex;
         flex-direction: column;
-
-        img {
-            flex: 1;
-            width: 816px;
-            border: 1px solid #E0E0E0;
-        }
     }
 
     .content__map_title {
         margin-bottom: 8px;
+    }
+
+    .content__map_body {
+        flex: 1;
+        border: 1px solid #E0E0E0;
     }
 </style>

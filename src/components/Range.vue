@@ -1,6 +1,6 @@
 <template>
     <div>
-        <vue-range
+        <vue-slider
             :bgStyle="bgStyle"
             :processStyle="processStyle"
             :sliderStyle="sliderStyle"
@@ -12,16 +12,16 @@
             @input="$emit('input', $event)"
             @drag-end="$emit('drag-end')"
         >
-        </vue-range>
+        </vue-slider>
     </div>
 </template>
 
 <script>
-    import vueRange from 'vue-slider-component';
+    import vueSlider from 'vue-slider-component';
 
     export default {
         components: {
-            vueRange
+            vueSlider
         },
         data() {
             return {

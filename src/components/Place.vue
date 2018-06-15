@@ -1,7 +1,7 @@
 <template>
     <div class="place-scroll text-1"
          :class="{ active: itemActive }"
-         @click="switchItemState"
+         @click="openDetailPage"
          @mouseenter="switchControlsState"
          @mouseleave="switchControlsState"
     >
@@ -9,15 +9,19 @@
         <div class="place-scroll__title">{{ place.name }}</div>
         <div class="place-scroll__reviews">
             <star class="text-1" :value="star"></star>
-            <span class="text-1">(Отзывов: {{ reviewNumber }})</span>
+            <span class="text-1">
+              (Отзывов: {{ reviewNumber }})
+            </span>
         </div>
         <div>
-            <span class="text-1">Средний чек:</span>
+            <span class="text-1">
+              Средний чек:
+            </span>
             <span class="place-scroll__average-check">{{ place.averageCheck }} &#x20bd; ({{ percentOfStipend }})
             </span>
         </div>
         <div>
-            <span class="text-1">{{ place.category ? place.category.name : '' }}</span>,
+            <span class="text-1">{{ place.category ? place.category.name : '' }},</span>
             <span class="place-scroll__address text-1">{{ place.address }}</span>
         </div>
     </div>
@@ -69,6 +73,9 @@
             },
             switchItemState() {
                 this.itemActive = !this.itemActive;
+            },
+            openDetailPage() {
+                this.$router.push({ name: 'place-detail', params: { id: this.place.id }});
             }
         }
     }
@@ -84,7 +91,6 @@
         width: 392px;
         height: 112px;
         background: #fff;
-        flex: 1;
         cursor: pointer;
 
         &:hover {
