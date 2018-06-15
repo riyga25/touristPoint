@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import MainPosition from './pages/Positions/Main.vue';
+    import MainPosition from './pages/Position/Main.vue';
 
     export default {
         components: {
@@ -24,7 +24,7 @@
         text-align: center;
     }
 
-    .not-found__image {
+    .not-found__back {
         margin: 20px 0 20px 0;
     }
 

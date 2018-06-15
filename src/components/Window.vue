@@ -6,16 +6,16 @@
                     <slot name="header">
                     </slot>
                 </div>
-                <button class="button-no" @click="close">&#x274c;</button>
+                <button class="button-no" @click.stop="close">&#x274c;</button>
             </div>
             <div class="window-body">
                 <slot name="body">
                 </slot>
             </div>
-            <div class="window-footer">
+            <div class="modal-window">
                 <slot name="footer">
                 </slot>
-                <button class="button button-cancel" @click="close">Отмена</button>
+                <button class="button btn-cancel" @click.stop="close">Отмена</button>
             </div>
         </div>
     </div>
@@ -53,13 +53,14 @@
     }
 
     .window-header,
-    .window-footer {
+    .modal-window {
         padding: 15px;
         display: flex;
     }
 
     .window-header {
         background: white;
+        border-bottom: 1px solid #eeeeee;
         color: black;
         justify-content: space-between;
         align-items: baseline;
@@ -67,7 +68,7 @@
         font-size: 18px;
     }
 
-    .window-footer {
+    .modal-window {
         border-top: 1px solid #eeeeee;
         justify-content: space-evenly;
     }
@@ -83,21 +84,21 @@
         cursor: pointer;
         font-weight: bold;
         color: #fff;
-        background: black;
+        background: transparent;
     }
 
     .button {
-        color: black;
+        color: white;
         border: none;
         padding: 10px 20px 10px 20px;
         cursor: pointer;
     }
 
     .btn-accept {
-        background: white;
+        background: #0073E6;
     }
 
-    .button-cancel {
-        background: white;
+    .btn-cancel {
+        background: #989898;
     }
 </style>

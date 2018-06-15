@@ -1,7 +1,7 @@
 <template>
     <div class="place-scroll__change">
-        <span class="place-scroll__change-edit"><router-link :to="{ name: 'place-edit', params: { id: placeId } }"></router-link></span>
-        <span class="place-scroll__change-delete" @click="$refs.window.showWindow()"><a></a></span>
+        <span class="place-scroll__change-edit" @click.stop="openEditPage"><a></a></span>
+        <span class="place-scroll__change-delete" @click.stop="$refs.window.showWindow()"><a></a></span>
         <delete :placeId="placeId" ref="window"></delete>
     </div>
 </template>
@@ -16,6 +16,11 @@
         props: {
             placeId: {
                 type: Number
+            }
+        },
+        methods: {
+            openEditPage() {
+                this.$router.push({ name: 'place-edit', params: { id: this.placeId }});
             }
         }
     }
@@ -33,7 +38,7 @@
         display: block;
         width: 20px;
         height: 20px;
-        background: url('../assets/images/Change.png');
+        background: url('../assets/images/change.png');
         background-size: 100%;
     }
 
@@ -41,7 +46,7 @@
         display: block;
         width: 20px;
         height: 20px;
-        background: url('../assets/images/Del.png');
+        background: url('../assets/images/del.png');
         background-size: 100%;
     }
 </style>

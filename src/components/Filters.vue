@@ -4,11 +4,11 @@
             <div class="filter-scroll">
                 <div class="filter-scroll__stipend">
                     <label class="text-1">
-                      Сколько: {{ stipend1 }}% - {{ stipend2 }}% стипендии
+                      Сколько: {{ Stipend1 }}% - {{ Stipend2 }}% стипендии
                     </label>
                     <range @drag-end="applyFilters" v-model="stipendPercentRange" ref="range"></range>
                 </div>
-                <div class="filter-item__star">
+                <div class="filter-scroll__star">
                     <label class="text-1">
                       Как:
                     </label>
@@ -21,9 +21,7 @@
                     </span>
                 </div>
                 <div class="filter-scroll__place">
-                    <label class="text-1">
-                      Где:
-                    </label>
+                    <label class="text-1">Где:</label>
                     <select v-model="categoryId" @change="applyFilters" >
                         <option></option>
                         <option v-for="category in categories" :value="category.id">{{ category.name }}</option>
@@ -46,29 +44,30 @@
                 star: null
             }
         },
-        components: {
+        components:
+          {
             Range
         },
         computed: {
             ...mapGetters([
-                'places',
-                'categories',
-                'getPlaceStar',
-                'getPlacePercentOfStipend'
+                'places', 'categories', 'getPlaceStar', 'getPlacePercentOfStipend'
             ]),
-            stipend1() {
+            Stipend1()
+            {
                 return this.stipendPercentRange[0];
             },
-            stipend2() {
+            Stipend2()
+            {
                 return this.stipendPercentRange[1];
             }
         },
         methods: {
-            getFilteredPlaces() {
+            getFilteredPlaces()
+            {
                 return this.places.filter(place =>
                 {
                     let percentOfStipend = this.getPlacePercentOfStipend(place);
-                    return (this.stipend1 <= percentOfStipend) && (percentOfStipend <= this.stipend2);
+                    return (this.Stipend1 <= percentOfStipend) && (percentOfStipend <= this.Stipend2);
                 }).filter(place =>
                 {
                     return this.categoryId ? (place.category.id == this.categoryId) : true;
@@ -80,8 +79,8 @@
             },
             applyFilters()
             {
-                let filteredPlaces = this.getFilteredPlaces();
-                this.$emit('filters-applied', filteredPlaces);
+                let filterPlace = this.getFilteredPlaces();
+                this.$emit('filters-applied', filterPlace);
             },
             resetFilters()
             {
@@ -126,7 +125,7 @@
         }
     }
 
-    .filter-item__star {
+    .filter-scroll__star {
         display: flex;
         flex-direction: column;
 
