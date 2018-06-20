@@ -1,4 +1,5 @@
 <template>
+  <transition name="pl-delete" enter-active-class="animated zoomInUp" leave-active-class="animated zoomOut">
       <window :showCancelButton="true" v-show="isWindowVisible" @close="closeWindow">
         <template slot="header">
             Удаление места
@@ -14,6 +15,7 @@
             </button>
         </template>
     </window>
+  </transition>
 </template>
 
 <script>

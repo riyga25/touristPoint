@@ -30,6 +30,7 @@
             </div>
         </nav>
         <main>
+          <transition name="pl-detail" enter-active-class="animated zoomInUp" leave-active-class="animated zoomOut">
             <div v-show="place" class="container">
                 <svg viewBox="0 0 32 32">
                     <circle :style="{ 'stroke-dasharray': percentOfStipend + ' 100' }" r="16" cx="16" cy="16" />
@@ -73,6 +74,7 @@
                     </div>
                 </div>
             </div>
+          </transition>
         </main>
     </main-position>
 </template>

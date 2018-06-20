@@ -1,4 +1,5 @@
 <template>
+  <transition name="review-add" enter-active-class="animated zoomInUp" leave-active-class="animated zoomOut">
     <window v-show="isWindowVisible" @close="closeWindow">
         <template slot="header">
             Оставить отзыв
@@ -31,6 +32,7 @@
             <button class="button button-accept" @click.stop="createReview">Отправить отзыв</button>
         </template>
     </window>
+  </transition>
 </template>
 
 <script>

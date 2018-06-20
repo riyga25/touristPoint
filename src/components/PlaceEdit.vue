@@ -22,6 +22,7 @@
             </div>
         </nav>
         <main>
+          <transition name="pl-edit" enter-active-class="animated zoomInUp" leave-active-class="animated zoomOut">
             <div v-show="place" class="container">
                 <section>
                     <div class="content">
@@ -74,6 +75,7 @@
                     </div>
                 </section>
             </div>
+          </transition>
         </main>
     </main-position>
 </template>
