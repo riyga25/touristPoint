@@ -6,9 +6,7 @@
   export default {
     data() {
       return {
-        map: {
-          type: Object
-        }
+        map:null
       }
     },
     props: {
@@ -22,12 +20,12 @@
     methods: {
       addPlacemarks() {
         this.places && this.places.forEach(place => {
-          this.addPlacemark(place);
+          this.addMarker(place);
         });
       },
-      addPlacemark(place) {
+      addMarker(place) {
         const defaultPreset = this.$store.getters.getPlaceIconByCategoryId(place.category.id);
-        const placemark = new ymaps.Placemark(place.coords, { hintContent: place.name }, { preset: defaultPreset });
+        const placemark = new ymaps.Placemark([place.lat, place.lon], { hintContent: place.name }, { preset: defaultPreset });
 
         this.map.geoObjects.add(placemark);
 
@@ -48,26 +46,34 @@
         this.map.geoObjects.removeAll();
       }
     },
-    created() {
-      this.$store.dispatch('getMap').then(map => {
-        this.map = map;
+    beforeCreate() {
+      this.$store.dispatch('getMap');
+    },
+    mounted() {
+      this.$store.getters.map.then(map => {
+        this.map = new map.Map('map', {
+          center: [54.314680, 48.395923],
+          zoom: 12
+        });
 
-        if (this.map) {
-          this.map.setCenter(this.center, this.zoom);
-          this.addPlacemarks();
+        this.map.setCenter(this.center, this.zoom);
+        this.addPlacemarks();
 
-          if (this.clickable) {
-            this.map.events.add('click', (e) => {
-              this.$emit('map-clicked', e.get('coords'));
-            });
-          }
+        if (this.clickable) {
+          this.map.events.add('click', (e) => {
+            this.$emit('map-clicked', e.get('coords'));
+          });
         }
-      })
+      }).catch(error => {
+        console.error('Error occurred while loading Yandex.Maps:', error);
+      });
     },
     watch: {
       places: function() {
-        this.clearMap();
-        this.addPlacemarks();
+        if (this.map) {
+          this.clearMap();
+          this.addPlacemarks();
+        }
       }
     }
   }

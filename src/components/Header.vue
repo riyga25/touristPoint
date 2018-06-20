@@ -31,7 +31,7 @@
                     return this.$store.getters.stipend;
                 },
                 set(value) {
-                    this.$store.dispatch('setStipend', value);
+                    this.$store.commit('setStipend', value);
                 }
             }
         }

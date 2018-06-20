@@ -1,5 +1,5 @@
 <template>
-    <main-posistion>
+    <main-position>
         <nav>
             <div class="container">
                 <div class="nav">
@@ -53,21 +53,21 @@
                             <label class="text-1" for="photo">
                               Фото:
                             </label>
-                            <input type="text" name="photo_url"
-                                   value="http://photo-bar.com"
-                                   disabled>
+                          <input v-model="place && place.image" type="text" name="photo_url">
                             <input type="file" name="photo" id="photo" accept="image/*">
 
-                            <img src="../assets/images/bar.jpeg">
+                          <img :src="place && place.image">
 
-                            <button class="text-1" type="submit" @click.prevent="savePlace">Сохранить</button>
+                          <button class="text-1" type="submit" @click.prevent="updatePlace">
+                            Сохранить
+                          </button>
                         </form>
                         <div class="content__map">
                             <span class="content__map_title text-1">
                               Укажите место на карте:
                             </span>
                                 <yandex-map class="content__map_body"
-                                    :width="'816px'" :height="'100%'" :places="[place]" :center="place.coords" :zoom="15"
+                                    :width="'816px'" :height="'100%'" :places="[place]"  :center="place && [place.lat, place.lon]" :zoom="15"
                                 >
                                 </yandex-map>
                         </div>
@@ -75,7 +75,7 @@
                 </section>
             </div>
         </main>
-    </main-posistion>
+    </main-position>
 </template>
 
 <script>
@@ -96,9 +96,9 @@
             }
         },
         methods: {
-            savePlace() {
-                this.$router.push('/');
-            }
+          updatePlace() {
+            this.$store.dispatch('updatePlace', { place: this.place, router: this.$router });
+          }
         }
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <window v-show="isWindowVisible" @close="closeWindow">
+      <window :showCancelButton="true" v-show="isWindowVisible" @close="closeWindow">
         <template slot="header">
             Удаление места
         </template>

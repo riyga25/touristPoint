@@ -15,7 +15,7 @@
         },
         props: {
             placeId: {
-                type: Number
+                type: String
             }
         },
         methods: {

@@ -1,27 +1,18 @@
 <template>
     <div>
-        <vue-slider
-            :bgStyle="bgStyle"
-            :processStyle="processStyle"
-            :sliderStyle="sliderStyle"
-            :height="height"
-            :dotWidth="dotWidth"
-            :dotHeight="dotHeight"
-            :tooltip="tooltip"
-            :value="value"
-            @input="$emit('input', $event)"
-            @drag-end="$emit('drag-end')"
+        <vue-range
+            :bgStyle="bgStyle" :processStyle="processStyle" :sliderStyle="sliderStyle" :height="height" :dotWidth="dotWidth" :dotHeight="dotHeight" :tooltip="tooltip" :value="value" @input="$emit('input', $event)" @drag-end="$emit('drag-end')"
         >
-        </vue-slider>
+        </vue-range>
     </div>
 </template>
 
 <script>
-    import vueSlider from 'vue-slider-component';
+    import vueRange from 'vue-slider-component';
 
     export default {
         components: {
-            vueSlider
+            vueRange
         },
         data() {
             return {

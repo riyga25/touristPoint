@@ -45,12 +45,12 @@
                             <span class="text-1">
                               Здесь можно прогулять
                             </span>
-                            <span class="text-1-dark">{{ isFinite(percentOfStipend) ? percentOfStipend + '% стипендии' : 'нисколько' }}</span>
+                            <span class="text-1-dark">{{ isFinite(percentOfStipend) ? percentOfStipend + '% стипендии' : 'error' }}</span>
                         </div>
                         <div class="place-shop__images">
-                            <img class="place-shop__images_photo" src="../assets/images/bar.jpeg">
+                          <img class="place-shop__images_photo" :src="place && place.image">
                             <div class="place-shop__images_map">
-                                <yandex-map :width="'400px'" :height="'400px'" :places="[place]" :center="place.coords" :zoom="15"></yandex-map>
+                              <yandex-map :width="'400px'" :height="'400px'" :places="[place]" :center="place && [place.lat, place.lon]" :zoom="15"></yandex-map>
                             </div>
                         </div>
                     </div>
@@ -59,16 +59,17 @@
                             <span class="text-1-dark">
                               Отзывы:
                             </span>
-                            <button class="text-1">
-                              Написать отзыв
-                            </button>
+                          <button @click.stop="$refs.window.showWindow()" class="text-1">
+                            Написать отзыв
+                          </button>
                         </div>
-                        <div v-if="place && place.review" class="place-reviews__items">
-                            <review v-for="review in place.review" :review="review" :key="review.id"></review>
+                      <div v-if="place && place.reviews && place.reviews.length" class="place-reviews__items">
+                         <review v-for="review in place.reviews" :review="review" :key="review.id"></review>
                         </div>
                         <div class="text-2 text-center" v-else>
                           Отзывов пока нет.Будьте первым!
                         </div>
+                      <review-create :placeId="place && place.id" ref="window"></review-create>
                     </div>
                 </div>
             </div>
@@ -80,12 +81,13 @@
     import MainPosition from './pages/Position/Main.vue';
     import Star from './Star.vue';
     import Review from './Review.vue';
+    import ReviewCreate from './ReviewAdd.vue';
     import YandexMap from './Map.vue';
     import { mapGetters } from 'vuex';
 
     export default {
         components: {
-            MainPosition, Star, Review, YandexMap
+            MainPosition, Star, Review, ReviewCreate,YandexMap
         },
         computed: {
             ...mapGetters([

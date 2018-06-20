@@ -6,5 +6,9 @@
 
 <script>
     export default {
+      beforeCreate() {
+        this.$store.dispatch('preparePlaces');
+        this.$store.dispatch('prepareCategories');
+                }
     }
 </script>
