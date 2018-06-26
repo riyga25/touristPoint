@@ -5,7 +5,6 @@
         <custom-footer></custom-footer>
     </div>
 </template>
-
 <script>
     import CustomHeader from '../../Header.vue';
     import CustomFooter from '../../Footer.vue';

@@ -7,7 +7,7 @@ a {
 .container {
   display: block;
   width: 100%;
-  max-width: 1240px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
@@ -15,33 +15,4 @@ main {
   background: #FBFBFB;
 }
 
-.text-1 {
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  color: #828282;
-}
 
-.text-1-dark {
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  color: #333333;
-}
-
-.text-2 {
-  font-family: 'Roboto Slab', serif;
-  font-size: 22px;
-  font-weight: bold;
-  color: #333333;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.button__cancel {
-  background-color: grey !important;
-}
-
-.text-center {
-  text-align: center;
-}
