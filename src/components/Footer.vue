@@ -16,6 +16,7 @@
 
 <style lang="scss">
     footer {
+      background: black;
         min-height: 50px;
         border-top: 1px solid #BDBDBD;
 
