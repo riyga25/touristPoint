@@ -1,6 +1,6 @@
 import Vue from 'vue/dist/vue';
 import Vuex from 'vuex';
-import map from './map';
+import map from './modules/map';
 
 Vue.use(Vuex);
 

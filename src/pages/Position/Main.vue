@@ -6,8 +6,8 @@
     </div>
 </template>
 <script>
-    import CustomHeader from '../../Header.vue';
-    import CustomFooter from '../../Footer.vue';
+    import CustomHeader from '../../components/Header.vue';
+    import CustomFooter from '../../components/Footer.vue';
 
     export default {
         components: {

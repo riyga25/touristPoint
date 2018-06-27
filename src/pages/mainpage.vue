@@ -24,8 +24,8 @@
 </template>
 
 <script>
-    import MainPosition from './pages/Position/Main.vue';
-    import YandexMap from './Map.vue';
+    import MainPosition from './Position/Main.vue';
+    import YandexMap from '../components/Map.vue';
     import { mapGetters } from 'vuex';
 
     export default {
