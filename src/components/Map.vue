@@ -26,7 +26,7 @@
 
         if (this.map) {
           this.map.setCenter(this.center, this.zoom);
-          this.addPlacemarks();
+          //this.addPlacemarks();
 
           if (this.clickable) {
             this.map.events.add('click', (e) => {

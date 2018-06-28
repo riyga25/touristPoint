@@ -11,43 +11,30 @@
         </v-toolbar>
         <v-navigation-drawer v-model="drawer" temporary absolute width="200">
           <v-list class="pt-0" dense>
-            <router-link to="/auth">
-              <v-list-tile>
-                 <v-list-tile-content>
-                   <v-list-tile-title>Вход</v-list-tile-title>
-                 </v-list-tile-content>
-              </v-list-tile>
-            </router-link>
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title>Выход</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
           </v-list>
         </v-navigation-drawer>
       </v-layout>
-      <div class="places__map">
-          <yandex-map
-               :places="filteredPlaces" :controls="['zoomControl']" @placemark-clicked="switchPlaceState"
-          >
-          </yandex-map>
-      </div>
+	  <router-link to="/addPlace">
+	      <v-btn class="btn btn-outline-success mr-3" block="true">Добавить место</v-btn> 
+	  </router-link>      
     </main>
 </template>
 
-<script>
-    import YandexMap from '../components/Map.vue';
-    import { mapGetters } from 'vuex';
-
+<script>    
+    
     export default {
-        components: {
-            YandexMap
+	    name: 'buisnessman',
+        components: {            
         },
         data() {
             return {
-                filteredPlaces: this.$store.getters.places,
-                drawer: false,
+                drawer: false
             }
-        },
-        methods: {
-          switchPlaceState() {
-            //TODO: implement this method
-          }
         }
     }
 </script>

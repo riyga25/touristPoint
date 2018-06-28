@@ -11,13 +11,11 @@
         </v-toolbar>
         <v-navigation-drawer v-model="drawer" temporary absolute width="200">
           <v-list class="pt-0" dense>
-            <router-link to="/auth">
-              <v-list-tile>
-                 <v-list-tile-content>
-                   <v-list-tile-title>Вход</v-list-tile-title>
-                 </v-list-tile-content>
-              </v-list-tile>
-            </router-link>
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title>Выход</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
           </v-list>
         </v-navigation-drawer>
       </v-layout>
@@ -35,6 +33,7 @@
     import { mapGetters } from 'vuex';
 
     export default {
+	    name: 'addPlace',
         components: {
             YandexMap
         },
@@ -43,11 +42,6 @@
                 filteredPlaces: this.$store.getters.places,
                 drawer: false,
             }
-        },
-        methods: {
-          switchPlaceState() {
-            //TODO: implement this method
-          }
         }
     }
 </script>
