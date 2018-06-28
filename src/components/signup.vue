@@ -1,22 +1,39 @@
 <template>
-  <form class="mt-5" @submit.prevent="registerUser">
-    <div class="form-group">
-      <label for="email">Ваш Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Введите email:" required v-model="user.email">
-    </div>
-    <div class="form-group">
-      <label for="password">Ваш пароль:</label>
-      <input type="password" class="form-control" id="password" placeholder="Введите пароль:" required v-model="user.password">
-    </div>
-    <div class="form-group">
-      <label for="password2">Повторите пароль:</label>
-      <input type="password" class="form-control" id="password2" placeholder="Введите пароль:" required v-model="user.confirmPassword">
-    </div>
-    <div class="alert alert-danger" role="alert" v-if="error">
-      <strong>Упс!</strong> Пароли не совпадают или вы забыли их ввести.
-    </div>
-    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-  </form>
+  <div>
+    <v-layout>
+      <v-toolbar dark color="primary">
+        <v-toolbar-title>
+          <router-link to="/" class="header-link">TouristPoint</router-link>
+        </v-toolbar-title>
+      </v-toolbar>
+    </v-layout>
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+          <v-flex xs12 sm8 md6>
+            <h1>Регистрация</h1>
+              <v-card-text>
+                <v-form>
+                  <v-text-field name="email" label="Почта" type="email"  v-model="user.email"></v-text-field>
+                  <v-text-field name="phone" label="Телефон" type="tel"  v-model="user.phone"></v-text-field>
+                  <v-text-field name="name" label="ФИО" type="text"  v-model="user.name"></v-text-field>
+                  <v-text-field name="password" label="Пароль" type="password" v-model="user.password"></v-text-field>
+                  <v-text-field name="password2" label="Повторите пароль" type="password" v-model="user.confirmPassword"></v-text-field>
+                </v-form>
+                <v-alert :value="error" type="error" v-if="error">
+                  <strong>Упс!</strong> Пароли не совпадают или вы забыли их ввести.
+                </v-alert>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn @click="routeBack">Назад</v-btn>
+                <v-spacer></v-spacer>
+                <v-btn color="primary" @click="registerUser">Зарегистрироваться</v-btn>
+              </v-card-actions>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </div>
 </template>
 <script>
  export default {
@@ -26,7 +43,9 @@
        user:{
          email:'',
          password:'',
-         confirmPassword:''
+         confirmPassword:'',
+         phone:'',
+         name:''
        },
        error:false
      }
@@ -44,6 +63,9 @@
              console.log(error);
            })
      }
+     },
+     routeBack(){
+       this.$router.go(-1);
      }
    }
  }

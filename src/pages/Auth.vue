@@ -1,5 +1,13 @@
 <template>
   <div>
+    <v-layout>
+      <v-toolbar dark color="primary">
+        <v-toolbar-title>
+          <router-link to="/" class="header-link">TouristPoint</router-link>
+        </v-toolbar-title>
+      </v-toolbar>
+    </v-layout>
+
     <div class="container-fluid navbar-inverse bg-inverse">
       <div class="row">
         <div class="col">
@@ -58,8 +66,3 @@
   }
 </script>
 
-<style>
-  span{
-    color: black;
-  }
-</style>

@@ -11,11 +11,13 @@
         </v-toolbar>
         <v-navigation-drawer v-model="drawer" temporary absolute width="200">
           <v-list class="pt-0" dense>
-            <v-list-tile>
-              <v-list-tile-content>
-                <v-list-tile-title>Вход</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
+            <router-link to="/auth">
+              <v-list-tile>
+                 <v-list-tile-content>
+                   <v-list-tile-title>Вход</v-list-tile-title>
+                 </v-list-tile-content>
+              </v-list-tile>
+            </router-link>
           </v-list>
         </v-navigation-drawer>
       </v-layout>
