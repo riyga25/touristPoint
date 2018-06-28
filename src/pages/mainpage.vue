@@ -1,41 +1,45 @@
 <template>
-    <main-position>
-        <main>
-            <div class="container">
-              <div>
-                <form class="input-group mt-5">
-                  <input type="text" class="form-control" placeholder="Добавьте место">
-                  <span class="input-group-btn">
-        <button class="btn btn-secondary" type="submit">Добавить!</button>
-      </span>
-                </form>
-              </div>
-                <div class="places">
-                    <div class="places__map">
-                        <yandex-map
-                            class="places__map1" :places="filteredPlaces" :width="'816px'" :height="'624px'" @placemark-clicked="switchPlaceState"
-                        >
-                        </yandex-map>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </main-position>
+    <main>
+      <v-layout>
+        <v-toolbar dark color="primary">
+          <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
+          <v-toolbar-title>TouristPoint</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn icon>
+            <v-icon>more_vert</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-navigation-drawer v-model="drawer" temporary absolute width="200">
+          <v-list class="pt-0" dense>
+            <v-list-tile>
+              <v-list-tile-content>
+                <v-list-tile-title>Вход</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
+        </v-navigation-drawer>
+      </v-layout>
+      <div class="places__map">
+          <yandex-map
+               :places="filteredPlaces" :controls="['zoomControl']" @placemark-clicked="switchPlaceState"
+          >
+          </yandex-map>
+      </div>
+    </main>
 </template>
 
 <script>
-    import MainPosition from './Position/Main.vue';
     import YandexMap from '../components/Map.vue';
     import { mapGetters } from 'vuex';
 
     export default {
         components: {
-            MainPosition,
             YandexMap
         },
         data() {
             return {
-                filteredPlaces: this.$store.getters.places
+                filteredPlaces: this.$store.getters.places,
+                drawer: false,
             }
         }
     }
@@ -61,14 +65,10 @@
     }
 
     .places__map {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .places__map1 {
-        flex: 1;
-        border: 1px solid #E0E0E0;
-        box-sizing: border-box;
+      min-width: 100%;
+      min-height: 100%;
+      width: 100vw;
+      height: 100vh;
     }
 
     .places__scroll {

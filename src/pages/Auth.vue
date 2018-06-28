@@ -23,12 +23,8 @@
         </div>
       </div>
     </div>
-    <div class="container" v-else>
-      <div class="row">
-        <div class="col">
-          <mainpage :uid="uid"></mainpage>
-        </div>
-      </div>
+    <div v-else>
+        <mainpage :uid="uid"></mainpage>
     </div>
   </div>
 </template>
