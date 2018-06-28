@@ -41,6 +41,11 @@
                 filteredPlaces: this.$store.getters.places,
                 drawer: false,
             }
+        },
+        methods: {
+          switchPlaceState() {
+            //TODO: implement this method
+          }
         }
     }
 </script>
