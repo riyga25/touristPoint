@@ -30,6 +30,12 @@
 
           if (this.clickable) {
             this.map.events.add('click', (e) => {
+			  this.map.geoObjects.removeAll();
+			    const pm = new ymaps.Placemark(e.get('coords'), {
+                  hintContent: "new place",
+                  balloonContent: "-"
+                });
+			  this.map.geoObjects.add(pm);
               this.$emit('map-clicked', e.get('coords'));
             });
           }

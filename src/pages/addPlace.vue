@@ -21,7 +21,7 @@
       </v-layout>
       <div class="places__map">
           <yandex-map
-               :places="filteredPlaces" :controls="['zoomControl']" @placemark-clicked="switchPlaceState"
+               :clickable="true" :controls="['zoomControl']" @map-clicked='onMapClicked'
           >
           </yandex-map>
       </div>
@@ -42,6 +42,11 @@
                 filteredPlaces: this.$store.getters.places,
                 drawer: false,
             }
+        },
+		methods: {     
+            onMapClicked (data) {	                  
+				console.log('coords: ' + data[0] + ' : ' + data[1]);
+            }	 
         }
     }
 </script>

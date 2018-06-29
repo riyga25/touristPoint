@@ -9,6 +9,6 @@ export default [
     { path: '/', name: 'home', component: Home },
     { path: '/auth', name: 'enter', component: SignIn },
     { path: '/registry', name: 'reg', component: SignUp },
-	  { path: '/addPlace', name: 'addPlace', component: addPlace },
-	  { path: '/buisnessman', name: 'buisnessman', component: buisnessman },
+	{ path: '/addPlace', name: 'addPlace', component: addPlace },
+	{ path: '/buisnessman', name: 'buisnessman', component: buisnessman },
 ]
