@@ -17,7 +17,6 @@
                 <v-text-field prepend-icon="email" name="login" label="Почта" type="email"  v-model="user.email"></v-text-field>
                 <v-text-field id="password" prepend-icon="lock" name="password" label="Пароль" type="password" v-model="user.password"></v-text-field>
               </v-card-text>
-              <v-alert v-if="error">qwq</v-alert>
               <v-card-actions>
                 <v-btn color="primary" to="registry">Зарегистрироваться</v-btn>
                 <v-spacer></v-spacer>
@@ -37,8 +36,7 @@
         user:{
           email:'',
           password:''
-        },
-        errorCheck: false
+        }
       }
     },
     methods:{
