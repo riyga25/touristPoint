@@ -1,37 +1,65 @@
 <template>
     <header>
-        <div class="container">
-            <div class="header">
-                <h2 class="header__title">
-                  TouristPoint!
-                </h2>
-            </div>
-        </div>
+        <v-toolbar
+                :clipped-left="$vuetify.breakpoint.lgAndUp"
+                dark
+                color="primary"
+                app
+                fixed
+        >
+            <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
+            <v-toolbar-title>
+                <router-link class="text-white"  to="/">
+                    TouristPoint
+                </router-link>
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn icon>
+                <v-icon>filter_list</v-icon>
+            </v-btn>
+        </v-toolbar>
+        <v-navigation-drawer
+                v-model="drawer"
+                temporary
+                absolute
+                width="250"
+                app
+        >
+            <v-list dense>
+                <v-list-tile>
+                    <v-list-tile-action>
+                        <v-icon>account_circle</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>
+                            <router-link class="text-main" to="/auth">
+                                Вход
+                            </router-link>
+                        </v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+        </v-navigation-drawer>
     </header>
 </template>
 
 <script>
     export default {
+        name: 'Header',
+        data(){
+            return{
+                drawer: false,
+            }
+        }
 
     }
 </script>
 
 <style lang="scss">
-    header {
-        color: #fff;
-        background: black;
+    .text-white{
+        color: white;
     }
-
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 50px;
-    }
-
-    .header__title {
-        font-family: 'Roboto Slab', serif;
-        font-size: 22px;
-        font-weight: bold;
+    .text-main{
+        color: rgba(0,0,0,.54);
     }
 </style>

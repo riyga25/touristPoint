@@ -1,5 +1,6 @@
 <template>
 	<v-app id="app">
+    <Header></Header>
     <transition :name="transitionType" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -7,9 +8,11 @@
 </template>
 
 <script>
-	export default {
+	import Header from "./components/Header";
+    export default {
 		name: "App",
-    data: function () {
+        components: {Header},
+        data: function () {
       return{
         transitionType : 'slide-left'
       }

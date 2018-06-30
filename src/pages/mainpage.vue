@@ -1,33 +1,10 @@
 <template>
-    <main>
-      <v-layout>
-        <v-toolbar dark color="primary">
-          <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
-          <v-toolbar-title>TouristPoint</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-btn icon>
-            <v-icon>more_vert</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-navigation-drawer v-model="drawer" temporary absolute width="200">
-          <v-list class="pt-0" dense>
-            <router-link to="/auth">
-              <v-list-tile>
-                 <v-list-tile-content>
-                   <v-list-tile-title>Вход</v-list-tile-title>
-                 </v-list-tile-content>
-              </v-list-tile>
-            </router-link>
-          </v-list>
-        </v-navigation-drawer>
-      </v-layout>
-      <div class="places__map">
-          <yandex-map
-               :places="filteredPlaces" :controls="['zoomControl']" @placemark-clicked="switchPlaceState"
-          >
-          </yandex-map>
-      </div>
-    </main>
+  <div class="places__map">
+      <yandex-map
+           :places="filteredPlaces" :controls="['zoomControl']" @placemark-clicked="switchPlaceState"
+      >
+      </yandex-map>
+  </div>
 </template>
 
 <script>
@@ -41,7 +18,6 @@
         data() {
             return {
                 filteredPlaces: this.$store.getters.places,
-                drawer: false,
             }
         },
         methods: {

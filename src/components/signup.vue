@@ -1,12 +1,4 @@
 <template>
-  <div>
-    <v-layout>
-      <v-toolbar dark color="primary">
-        <v-toolbar-title>
-          <router-link to="/" class="header-link">TouristPoint</router-link>
-        </v-toolbar-title>
-      </v-toolbar>
-    </v-layout>
     <v-content>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
@@ -33,7 +25,6 @@
         </v-layout>
       </v-container>
     </v-content>
-  </div>
 </template>
 <script>
   import firebase from 'firebase';
