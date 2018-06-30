@@ -1,44 +1,70 @@
 <template>
     <header>
         <v-toolbar
-                :clipped-left="$vuetify.breakpoint.lgAndUp"
-                dark
-                color="primary"
-                app
-                fixed
+          app
+          dark
+          color="primary"
         >
-            <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title>
-                <router-link class="text-white"  to="/">
-                    TouristPoint
-                </router-link>
-            </v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-btn icon>
-                <v-icon>filter_list</v-icon>
+          <v-toolbar-side-icon
+            @click="drawer = !drawer"
+            class="hidden-md-and-up"
+          ></v-toolbar-side-icon>
+          <v-toolbar-title>
+            <router-link to="/" tag="span" class="pointer">TouristPoint</router-link>
+          </v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items class="hidden-sm-and-down">
+            <v-btn
+              v-for="link in links"
+              :key="link.title"
+              :to="link.url"
+              flat
+            >
+              <v-icon left>{{link.icon}}</v-icon>
+              {{link.title}}
             </v-btn>
+            <v-btn
+              @click="onLogout"
+              flat
+              v-if="isUserLoggedIn"
+              >
+              <v-icon left>exit_to_app</v-icon>
+              Выйти
+            </v-btn>
+          </v-toolbar-items>
         </v-toolbar>
+
         <v-navigation-drawer
-                v-model="drawer"
-                temporary
-                absolute
-                width="250"
-                app
-        >
-            <v-list dense>
-                <v-list-tile>
-                    <v-list-tile-action>
-                        <v-icon>account_circle</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title>
-                            <router-link class="text-main" to="/auth">
-                                Вход
-                            </router-link>
-                        </v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
-            </v-list>
+          width="250"
+          app
+          temporary
+          v-model="drawer"
+          >
+          <v-list>
+            <v-list-tile
+              v-for="link of links"
+              :key="link.title"
+              :to="link.url"
+            >
+              <v-list-tile-action>
+                <v-icon>{{link.icon}}</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title v-text="link.title"></v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+            <v-list-tile
+              v-if="isUserLoggedIn"
+              @click="onLogout"
+            >
+              <v-list-tile-action>
+                <v-icon>exit_to_app</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title v-text="'Выйти'"></v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
         </v-navigation-drawer>
     </header>
 </template>
@@ -48,18 +74,39 @@
         name: 'Header',
         data(){
             return{
-                drawer: false,
+              drawer: false
             }
+        },
+        computed: {
+          isUserLoggedIn () {
+            return this.$store.getters.isUserLoggedIn
+          },
+          links () {
+            if (this.isUserLoggedIn) {
+              return [
+                {title: 'Добавить место', icon: 'note_add', url: '/place_add'},
+                {title: 'Мои места', icon: 'list', url: '/places'}
+              ]
+            }
+
+            return [
+              {title: 'Войти', icon: 'home', url: '/login'},
+              {title: 'Регистрация', icon: 'person_add', url: '/registration'}
+            ]
+          }
+        },
+        methods: {
+          onLogout () {
+            this.$store.dispatch('logoutUser');
+            this.$router.push('/');
+          }
         }
 
     }
 </script>
 
 <style lang="scss">
-    .text-white{
-        color: white;
-    }
-    .text-main{
-        color: rgba(0,0,0,.54);
+    .pointer {
+      cursor: pointer;
     }
 </style>

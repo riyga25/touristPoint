@@ -1,18 +1,23 @@
 <template>
 	<v-app id="app">
     <Header></Header>
-    <transition :name="transitionType" mode="out-in">
-      <router-view></router-view>
-    </transition>
+      <v-content>
+        <transition :name="transitionType" mode="out-in">
+          <router-view></router-view>
+        </transition>
+      </v-content>
+    <footer></footer>
 	</v-app>
 </template>
 
 <script>
 	import Header from "./components/Header";
+	import firebase from "firebase";
+
     export default {
 		name: "App",
-        components: {Header},
-        data: function () {
+    components: {Header},
+    data(){
       return{
         transitionType : 'slide-left'
       }
@@ -23,6 +28,16 @@
         const fromDepth = from.path.split('/').length;
         this.transitionType = toDepth < fromDepth ? 'slide-right' : 'slide-left'
       }
+    },
+    mounted(){
+
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          this.$store.dispatch('autoLoginUser', user)
+        }
+      });
+
+      this.$store.dispatch('fetchAds');
     }
 	}
 </script>

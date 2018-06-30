@@ -1,16 +1,18 @@
-import Home from '../pages/mainpage.vue';
-import buisnessman from '../pages/buisnessman.vue';
-import addPlace from '../pages/addPlace';
-// import Auth from '../pages/Auth';
-import  SignIn from '../components/signin';
-import  SignUp from '../components/signup';
-import test from '../components/tezt' //потом выпилить этот компонент
+import main from '@/pages/main.vue';
+import checkAuth from './auth-guard'
+import place from '@/pages/User/Ad'
+import user_places from '@/pages/User/AdList'
+import user_placeAdd from '@/pages/User/placeAdd'
+import login from '@/pages/Login'
+import registration from '@/pages/Registration'
+import page404 from '@/pages/404'
 
 export default [
-    { path: '/', name: 'home', component: Home },
-    { path: '/auth', name: 'enter', component: SignIn },
-    { path: '/registry', name: 'reg', component: SignUp },
-	{ path: '/addPlace', name: 'addPlace', component: addPlace },
-	{ path: '/buisnessman', name: 'buisnessman', component: buisnessman },
-	{ path: '/test', name: 'test', component: test },
+    { path: '/', name: 'main', component: main },
+    { path: '*', name: 'page404', component: page404 },
+    { path: '/place/:id', props: true, name: 'place', component: place},
+    { path: '/places', name: 'user_places', component: user_places, beforeEnter: checkAuth},
+    { path: '/place_add', name: 'newAd', component: user_placeAdd, beforeEnter: checkAuth},
+    { path: '/login', name: 'login', component: login},
+    { path: '/registration', name: 'reg', component: registration}
 ]
