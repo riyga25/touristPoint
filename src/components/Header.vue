@@ -13,7 +13,7 @@
             <router-link to="/" tag="span" class="pointer">TouristPoint</router-link>
           </v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-toolbar-items class="hidden-sm-and-down">
+          <v-toolbar-items class="hidden-sm-and-down" v-show="whichUser">
             <v-btn
               v-for="link in links"
               :key="link.title"
@@ -26,7 +26,7 @@
             <v-btn
               @click="onLogout"
               flat
-              v-if="isUserLoggedIn"
+              v-if="whichUser !== 'guest'"
               >
               <v-icon left>exit_to_app</v-icon>
               Выйти
@@ -54,7 +54,7 @@
               </v-list-tile-content>
             </v-list-tile>
             <v-list-tile
-              v-if="isUserLoggedIn"
+              v-if="whichUser !== 'guest'"
               @click="onLogout"
             >
               <v-list-tile-action>
@@ -78,21 +78,22 @@
             }
         },
         computed: {
-          isUserLoggedIn () {
-            return this.$store.getters.isUserLoggedIn
+          whichUser () {
+            return this.$store.getters.user;
           },
           links () {
-            if (this.isUserLoggedIn) {
+            if (this.whichUser === 'user') {
               return [
                 {title: 'Добавить место', icon: 'note_add', url: '/place_add'},
                 {title: 'Мои места', icon: 'list', url: '/places'}
               ]
             }
-
-            return [
-              {title: 'Войти', icon: 'home', url: '/login'},
-              {title: 'Регистрация', icon: 'person_add', url: '/registration'}
-            ]
+            else if (this.whichUser === 'guest') {
+              return [
+                {title: 'Войти', icon: 'home', url: '/login'},
+                {title: 'Регистрация', icon: 'person_add', url: '/registration'}
+              ]
+            }
           }
         },
         methods: {

@@ -29,11 +29,10 @@
         this.transitionType = toDepth < fromDepth ? 'slide-right' : 'slide-left'
       }
     },
-    mounted(){
-
+    created(){
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          this.$store.dispatch('autoLoginUser', user)
+          this.$store.dispatch('checkUser', user)
         }
       });
 
