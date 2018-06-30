@@ -1,5 +1,9 @@
 <template>
     <header>
+	    <filters
+             :dialog="filters"
+             @close="closeModal"
+        />
         <v-toolbar
           app
           dark
@@ -41,6 +45,9 @@
           v-model="drawer"
           >
           <v-list>
+            <v-list-tile>
+              <v-list-tile-title @click="openModal()">Фильтры</v-list-tile-title>
+            </v-list-tile>
             <v-list-tile
               v-for="link of links"
               :key="link.title"
@@ -70,11 +77,16 @@
 </template>
 
 <script>
+    import filters from '../components/filters.vue';
     export default {
         name: 'Header',
+		components: {
+            filters
+        },
         data(){
             return{
-              drawer: false
+              drawer: false,
+              filters: false
             }
         },
         computed: {
@@ -99,6 +111,13 @@
           onLogout () {
             this.$store.dispatch('logoutUser');
             this.$router.push('/');
+          },
+          openModal() {
+            this.drawer = false;
+            this.filters = true;
+          },
+          closeModal() {
+            this.filters = false;
           }
         }
 
