@@ -1,5 +1,9 @@
 <template>
     <header>
+	    <filters
+             :dialog="filters" 
+             @close="closeModal"			 
+        />
         <v-toolbar
                 :clipped-left="$vuetify.breakpoint.lgAndUp"
                 dark
@@ -34,8 +38,9 @@
                         <v-list-tile-title>
                             <router-link class="text-main" to="/auth">
                                 Вход
-                            </router-link>
+                            </router-link>							
                         </v-list-tile-title>
+					<v-list-tile-title @click="openModal()">Фильтры</v-list-tile-title>	
                     </v-list-tile-content>
                 </v-list-tile>
             </v-list>
@@ -44,13 +49,27 @@
 </template>
 
 <script>
+    import filters from '../components/filters.vue';
     export default {
         name: 'Header',
+		components: {
+            filters
+        },
         data(){
             return{
                 drawer: false,
+				filters: false,
             }
-        }
+        },
+		methods: {
+            openModal() {
+                this.drawer = false;
+			    this.filters = true;
+            },
+		    closeModal() {            
+			    this.filters = false;
+            }
+        },
 
     }
 </script>
