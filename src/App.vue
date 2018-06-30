@@ -26,13 +26,13 @@
       '$route' (to, from) {
         const toDepth = to.path.split('/').length;
         const fromDepth = from.path.split('/').length;
-        this.transitionType = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+        this.transitionType = toDepth < fromDepth ? 'slide-right' : 'slide-left';
       }
     },
     created(){
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
-          this.$store.dispatch('checkUser', user)
+          this.$store.dispatch('checkUser', user);
         }
       });
 

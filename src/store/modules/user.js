@@ -20,6 +20,9 @@ export default {
       if(user !== state.admin){
         state.user = 'user'
       }
+    },
+    guest(state){
+      state.user = 'guest';
     }
   },
   actions: {

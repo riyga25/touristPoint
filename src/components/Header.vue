@@ -53,6 +53,7 @@
                 <v-list-tile-title v-text="link.title"></v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
+
             <v-list-tile
               v-if="whichUser !== 'guest'"
               @click="onLogout"

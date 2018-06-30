@@ -12,7 +12,7 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 Vue.use(vuetify);
 
-var config = {
+const config = {
     apiKey: "AIzaSyAGqryckvGc3Nsg6-HKteOz5h-gar6efCg",
     authDomain: "vuepwa-f2d08.firebaseapp.com",
     databaseURL: "https://vuepwa-f2d08.firebaseio.com",
@@ -26,5 +26,5 @@ new Vue({
     el: '#app',
     router,
     store,
-    render: h => h(App)
+    render: h => h(App),
 });
