@@ -1,11 +1,11 @@
 <template>
 	<v-app id="app">
     <Header></Header>
-      <v-content>
+      <v-conten>
         <transition :name="transitionType" mode="out-in">
           <router-view></router-view>
         </transition>
-      </v-content>
+      </v-conten>
     <footer></footer>
 	</v-app>
 </template>

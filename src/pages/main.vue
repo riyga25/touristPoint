@@ -1,28 +1,52 @@
 <template>
-  <div class="places__map">
+    <div class="places__map">
+      <filters
+        :dialog="filters"
+        @close="closeModal"
+      />
       <yandex-map
-           :places="filteredPlaces" :controls="['zoomControl']" @placemark-clicked="switchPlaceState"
+        :places="filteredPlaces"
+        :controls="['zoomControl']"
+        @placemark-clicked="switchPlaceState"
       >
       </yandex-map>
-  </div>
+      <v-btn
+        fab
+        color="primary"
+        bottom
+        right
+        fixed
+        @click="openModal()"
+      >
+        <v-icon>filter_list</v-icon>
+      </v-btn>
+    </div>
 </template>
 
 <script>
     import YandexMap from '../components/Map.vue';
-    import { mapGetters } from 'vuex';
+    import filters from '../components/filters.vue';
 
     export default {
         components: {
-            YandexMap
+          YandexMap,
+          filters
         },
         data() {
             return {
-                filteredPlaces: this.$store.getters.places,
+              filteredPlaces: this.$store.getters.places,
+              filters: false
             }
         },
         methods: {
           switchPlaceState() {
             //TODO: implement this method
+          },
+          openModal() {
+            this.filters = true;
+          },
+          closeModal() {
+            this.filters = false;
           }
         }
     }
@@ -52,6 +76,7 @@
       min-height: 100%;
       width: 100vw;
       height: 100vh;
+      position: relative;
     }
 
     .places__scroll {
