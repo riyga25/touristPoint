@@ -77,6 +77,10 @@
       width: 100vw;
       height: 100vh;
       position: relative;
+
+      .btn--floating .icon{
+        height: 21px;
+      }
     }
 
     .places__scroll {
@@ -88,7 +92,6 @@
         border-top: 1px solid #E0E0E0;
         border-bottom: 1px solid #E0E0E0;
     }
-
     .places__not-found {
         margin-top: 20px;
     }

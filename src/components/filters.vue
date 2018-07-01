@@ -10,7 +10,7 @@
               <v-layout align-center justify-center>
 			    <v-flex xs12 >
                   <v-select
-                    :items="['кафе', 'бар', 'ресторан']"
+                    :items= "getCategories"
                     label="Категории"
                   ></v-select>
                   <h4>Минимальная оценка</h4>
@@ -40,21 +40,19 @@
 
     export default {
     name: 'filters',
-	components: {
-	  StarRating,
+	  components: {
+	    StarRating,
     },
-	props: ['dialog'],
-	data () {
-      return {
-      }
-    },
+	  props: ['dialog'],
     methods: {
       close() {
         this.$emit('close');
       },
     },
     computed: {
-
+      getCategories(){
+        return this.$store.getters.categories;
+      }
     },
   };
 </script>

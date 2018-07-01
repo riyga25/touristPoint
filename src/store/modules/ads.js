@@ -29,6 +29,12 @@ export default {
 
       ad.title = title;
       ad.description = description
+    },
+    deleteAd(state,key){
+      let index = state.ads.findIndex(ad => ad.id === key);
+      if (index > -1) {
+        state.ads.splice(index, 1);
+      }
     }
   },
   actions: {
@@ -112,7 +118,21 @@ export default {
         commit('setLoading', false);
         throw error
       }
-    }
+    },
+    async deleteAd ({commit}, item) {
+      commit('clearError');
+      commit('setLoading', true);
+      console.log('asdas');
+      try {
+        await fb.database().ref('ads').child(item).remove();
+        commit('setLoading', false);
+        commit('deleteAd',item);
+      } catch (error) {
+        commit('setError', error.message);
+        commit('setLoading', false);
+        throw error
+      }
+    },
   },
   getters: {
     ads (state) {

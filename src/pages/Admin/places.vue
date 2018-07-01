@@ -1,24 +1,26 @@
 <template>
     <v-container>
-        <v-flex xs12 sm6 offset-sm3>
-            <v-data-table
-                    :headers="headers"
-                    :items="places"
-                    hide-actions
-                    item-key="id"
+      <v-layout row justify-center>
+        <v-flex xs12>
+          <v-list>
+            <v-list
+              v-for="item in places"
+              :key="item.id"
+              no-action
+              xs12
             >
-                <template slot="items" slot-scope="props">
-                    <tr @click="props.expanded = !props.expanded">
-                        <td class="text-xs-center">{{ props.item.title }}</td>
-                    </tr>
-                </template>
-                <template slot="expand" slot-scope="props">
-                    <v-card flat>
-                        <v-card-text>{{props.item.description}}</v-card-text>
-                    </v-card>
-                </template>
-            </v-data-table>
+              <v-list-tile>
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ item.title}}</v-list-tile-title>
+                </v-list-tile-content>
+                <v-list-tile-action>
+                  <v-icon @click="deletePlace(item.id)">delete</v-icon>
+                </v-list-tile-action>
+              </v-list-tile>
+            </v-list>
+          </v-list>
         </v-flex>
+      </v-layout>
     </v-container>
 </template>
 
@@ -39,10 +41,17 @@
             loading () {
                 return this.$store.getters.loading;
             }
-        }
+        },
+      methods:{
+          deletePlace(key){
+            this.$store.dispatch('deleteAd',key);
+          }
+      }
     }
 </script>
 
 <style scoped>
-
+  i{
+    cursor: pointer;
+  }
 </style>
