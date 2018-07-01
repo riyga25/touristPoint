@@ -8,6 +8,7 @@ class User {
 
 export default {
   state: {
+    id: '',
     user: 'guest',
     admin: 'admin@admin.ru'
   },
@@ -23,6 +24,9 @@ export default {
     },
     guest(state){
       state.user = 'guest';
+    },
+    setId(state, id = '') {
+      state.id = id;
     }
   },
   actions: {
@@ -31,7 +35,8 @@ export default {
       commit('setLoading', true);
       try {
         const user = await fb.auth().createUserWithEmailAndPassword(email, password);
-        commit('checkUser', user.email);
+        commit('checkUser', user.user.email);
+        commit('setId', user.user.uid);
         commit('setLoading', false)
       } catch (error) {
         commit('setLoading', false);
@@ -44,7 +49,8 @@ export default {
       commit('setLoading', true);
       try {
         const user = await fb.auth().signInWithEmailAndPassword(email, password);
-        commit('checkUser', user.email);
+        commit('checkUser', user.user.email);
+        commit('setId', user.user.uid);
         commit('setLoading', false)
       } catch (error) {
         commit('setLoading', false);
@@ -54,6 +60,7 @@ export default {
     },
     checkUser({commit},user){
       commit('checkUser',user.email);
+      commit('setId', user.uid);
     },
     logoutUser ({commit}) {
       fb.auth().signOut().then(()=>{
@@ -66,6 +73,9 @@ export default {
   getters: {
     user (state) {
       return state.user
+    },
+    getUserUid(state) {
+      return state.id;
     }
   }
 }

@@ -51,7 +51,7 @@
             <v-spacer></v-spacer>
             <v-btn
               :loading="loading"
-              :disabled="!valid || !image || loading"
+              :disabled="!valid || !isFormFilled || loading"
               class="success"
               @click="createAd"
             >
@@ -78,29 +78,35 @@
         promo: false,
         valid: false,
         image: null,
-        imageSrc: ''
+        imageSrc: '',
+        coords: null
       }
     },
     computed: {
       loading () {
         return this.$store.getters.loading
+      },
+      isFormFilled() {
+        return  this.coords &&
+                this.image
       }
     },
     methods: {
       createAd () {
-        if (this.$refs.form.validate() && this.image) {
+        if (this.isFormFilled && this.$refs.form.validate()) {
           const ad = {
             title: this.title,
             description: this.description,
+            coords: this.coords,
             promo: this.promo,
             image: this.image
           };
 
           this.$store.dispatch('createAd', ad)
             .then(() => {
+              this.$store.dispatch('fetchAds');
               this.$router.push('/places')
             })
-            .catch(() => {})
         }
       },
       triggerUpload () {
@@ -117,7 +123,9 @@
         this.image = file
       },
       onMapClicked (data) {
-        this.coords = data;
+        if (data instanceof Array) {
+          this.coords = data;
+        }
       }
     }
   }

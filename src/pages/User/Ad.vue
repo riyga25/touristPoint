@@ -14,7 +14,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <addEditAdModal :ad="ad" v-if="isOwner"></addEditAdModal>
-            <v-btn class="success">Удалить</v-btn>
+            <v-btn class="success" @click="removeAd">Удалить</v-btn>
           </v-card-actions>
         </v-card>
         <div v-else class="text-xs-center">
@@ -35,6 +35,15 @@ import EditAdModal from '@/components/modal_editPlace'
 
 export default {
   props: ['id'],
+  methods: {
+    removeAd() {
+      this.$store.dispatch('removeAd', this.ad.id).then(() => {
+        this.$router.push({
+          name: 'user_places'
+        })
+      })
+    }
+  },
   computed: {
     ad () {
       const id = this.id;
