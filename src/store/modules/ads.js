@@ -1,13 +1,22 @@
 import * as fb from 'firebase'
 
 class Ad {
-  constructor (title, description, ownerId, imageSrc = '', promo = false, id = null) {
+  constructor ({
+    title = '',
+    description = '',
+    ownerId = '',
+    imageSrc = '',
+    coords = [],
+    promo = false,
+    id = null
+  }) {
     this.title = title
     this.description = description
     this.ownerId = ownerId
     this.imageSrc = imageSrc
     this.promo = promo
     this.id = id
+    this.coords = coords
   }
 }
 
@@ -29,6 +38,18 @@ export default {
 
       ad.title = title;
       ad.description = description
+    },
+    removeAd (state, id) {
+      const adIndex = state.ads.reduce((adIndex, ad, index) => {
+        if (ad.id === id) {
+          adIndex = index;
+        }
+        return adIndex;
+      }, null);
+
+      if (adIndex !== null) {
+        state.ads.splice(adIndex, 1);
+      }
     }
   },
   actions: {
@@ -39,30 +60,24 @@ export default {
       const image = payload.image;
 
       try {
-        const newAd = new Ad(
-          payload.title,
-          payload.description,
-          getters.user.id,
-          '',
-          payload.promo
-        );
+        const newAd = new Ad({
+          ...payload,
+          ownerId: getters.getUserUid,
+        });
 
         const ad = await fb.database().ref('ads').push(newAd);
         const imageExt = image.name.slice(image.name.lastIndexOf('.'));
-
         const fileData = await fb.storage().ref(`ads/${ad.key}.${imageExt}`).put(image);
-        const imageSrc = fileData.metadata.downloadURLs[0];
+        const imageSrc = await fileData.ref.getDownloadURL();
 
         await fb.database().ref('ads').child(ad.key).update({
           imageSrc
         });
 
-
         commit('setLoading', false);
         commit('createAd', {
           ...newAd,
           id: ad.key,
-          imageSrc
         })
       } catch (error) {
         commit('setError', error.message)
@@ -83,7 +98,10 @@ export default {
         Object.keys(ads).forEach(key => {
           const ad = ads[key];
           resultAds.push(
-            new Ad(ad.title, ad.description, ad.ownerId, ad.imageSrc, ad.promo, key)
+            new Ad({
+              ...ad,
+              id: key
+            })
           )
         });
 
@@ -112,6 +130,19 @@ export default {
         commit('setLoading', false);
         throw error
       }
+    },
+    async removeAd ({commit}, id) {
+      commit('setLoading', true);
+
+      try {
+        await fb.database().ref('ads').child(id).remove();
+        commit('removeAd', id);
+        commit('setLoading', false)
+      } catch (error) {
+        commit('setError', error.message);
+        commit('setLoading', false);
+        throw error
+      }
     }
   },
   getters: {
@@ -125,7 +156,7 @@ export default {
     },
     myAds (state, getters) {
       return state.ads.filter(ad => {
-        return ad.ownerId === getters.user.id
+        return ad.ownerId === getters.getUserUid
       })
     },
     adById (state) {
