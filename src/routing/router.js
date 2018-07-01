@@ -29,7 +29,12 @@ router.beforeEach((to, from, next) => {
         }else{
             store.commit('guest');
             checkUser = 'guest';
-            next();
+
+            if(checkUser === requiresAuth){
+              next();
+            }else{
+              next('/')
+            }
         }
     }else{
         next();

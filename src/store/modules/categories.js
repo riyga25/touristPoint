@@ -12,8 +12,22 @@ export default{
       try {
         const fbVal = await farebase.database().ref('categories').once('value');
         const categories = fbVal.val();
-        console.log(categories);
-        commit('loadCategories', categories);
+
+        let newArr = [];
+
+        Object.keys(categories).forEach(key => {
+          let category = categories[key];
+          let newItem = {
+            name: category.name,
+            color: category.color,
+            id: key
+          };
+          newArr.push(
+            newItem
+          )
+        });
+
+        commit('loadCategories', newArr);
         commit('setLoading', false)
       } catch (error) {
         commit('setError', error.message);
@@ -26,10 +40,11 @@ export default{
       commit('setLoading', true);
 
       try {
-        await farebase.database().ref('categories').push(item);
-
+        let category = await farebase.database().ref('categories').push(item);
+        item.id = category.key;
         commit('setLoading', false);
-        commit('createCategory',item)
+        commit('createCategory',item);
+        console.log('asda!!! '+item);
       } catch (error) {
         commit('setError', error.message);
         commit('setLoading', false);
@@ -39,11 +54,12 @@ export default{
   },
   mutations:{
     loadCategories(state,items){
+      console.log('load '+items);
       state.categoiesAll = items;
     },
     createCategory(state,item){
       console.log(typeof(state.categoiesAll));
-      // state.categoiesAll.push(item);
+      state.categoiesAll.push(item);
     }
   },
   getters:{
