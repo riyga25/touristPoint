@@ -95,6 +95,13 @@
                 {title: 'Регистрация', icon: 'person_add', url: '/registration'}
               ]
             }
+            else if (this.whichUser === 'admin') {
+              return [
+                  {title: 'Пользователи', icon: 'group', url: '/users'},
+                  {title: 'Mecтa', icon: 'place', url: '/places_all'},
+                  {title: 'Категории', icon: 'store_mall_directory', url: '/categories'}
+              ]
+            }
           }
         },
         methods: {

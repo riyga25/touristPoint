@@ -95,7 +95,6 @@
             description: this.description,
             promo: this.promo,
             image: this.image,
-            coords: this.coords
           };
 
           this.$store.dispatch('createAd', ad)

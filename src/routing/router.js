@@ -12,30 +12,30 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    const currentUser = Firebase.auth().currentUser;
-    let nowUser = store.getters.user;
     let requiresAuth = to.meta.users;
-
-    if(currentUser){
-        store.dispatch('checkUser',currentUser);
-        next();
-    }
-    else{
-        store.commit('guest');
-        next();
-    }
+    let user = Firebase.auth().currentUser;
+    let checkUser = 'guest';
 
     if(requiresAuth){
-        if(nowUser === requiresAuth){
+        if(user){
+            store.dispatch('checkUser',user);
+            console.log('then');
+            checkUser = store.getters.user;
+
+            if(checkUser === requiresAuth){
+                next();
+            }else{
+                next('/')
+            }
+        }else{
+            store.commit('guest');
+            checkUser = 'guest';
             next();
         }
-        else{
-            next('/error');
-        }
-    }
-    else{
-        next()
+    }else{
+        next();
     }
 
+    console.log('!!@ '+checkUser);
 });
 export default router;

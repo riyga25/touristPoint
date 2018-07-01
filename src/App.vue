@@ -29,8 +29,9 @@
         this.transitionType = toDepth < fromDepth ? 'slide-right' : 'slide-left';
       }
     },
-    created(){
+    beforeCreate(){
       firebase.auth().onAuthStateChanged(user => {
+          console.log('app check user');
         if (user) {
           this.$store.dispatch('checkUser', user);
         }

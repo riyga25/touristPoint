@@ -57,7 +57,7 @@ export default {
     },
     logoutUser ({commit}) {
       fb.auth().signOut().then(()=>{
-          commit('checkUser', 'guest');
+          commit('guest');
           location.reload();
       }
       );
