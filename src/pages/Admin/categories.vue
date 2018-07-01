@@ -4,7 +4,7 @@
       <v-dialog v-model="dialog" persistent max-width="500px">
         <v-btn slot="activator" color="primary" dark>Добавить категорию</v-btn>
         <v-card>
-          <v-form @submit.prevent="submit">
+          <v-form @submit.prevent="submit" ref="form">
             <v-card-title>
               <span class="headline">Новая категория</span>
             </v-card-title>
@@ -34,7 +34,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" dark flat @click.native="dialog = false">Закрыть</v-btn>
+              <v-btn color="primary" @click="clearForm" dark flat @click.native="dialog = false">Закрыть</v-btn>
               <v-btn type="submit" color="primary" dark flat @click.native="dialog = false">Добавить</v-btn>
             </v-card-actions>
           </v-form>
@@ -46,9 +46,7 @@
         <v-list>
           <v-list
             v-for="item in categories"
-            v-model="item.active"
-            :key="item.index"
-            :prepend-icon="item.action"
+            :key="item.id"
             no-action
             xs12
           >
@@ -56,7 +54,7 @@
               <v-list-tile-content>
                 <v-list-tile-title>{{ item.name }}</v-list-tile-title>
               </v-list-tile-content>
-              <v-list-tile-action @click="deleteCategory">
+              <v-list-tile-action @click="deleteCategory(item.id)">
                 <v-icon>delete</v-icon>
               </v-list-tile-action>
             </v-list-tile>
@@ -88,8 +86,11 @@
         submit(){
           this.$store.dispatch('createCategory',this.category);
         },
-        deleteCategory(){
-
+        deleteCategory(itemId){
+          this.$store.dispatch('deleteCategory',itemId);
+        },
+        clearForm(){
+          this.$refs.form.reset()
         }
       }
     }

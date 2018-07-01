@@ -2,7 +2,7 @@ import farebase from 'firebase';
 
 export default{
   state:{
-    categoiesAll:[]
+    categoriesAll:[]
   },
   actions:{
     async fetchCategories({commit}) {
@@ -41,10 +41,23 @@ export default{
 
       try {
         let category = await farebase.database().ref('categories').push(item);
-        item.id = category.key;
         commit('setLoading', false);
+        item.id = category.key;
         commit('createCategory',item);
-        console.log('asda!!! '+item);
+      } catch (error) {
+        commit('setError', error.message);
+        commit('setLoading', false);
+        throw error
+      }
+    },
+    async deleteCategory ({commit}, item) {
+      commit('clearError');
+      commit('setLoading', true);
+
+      try {
+        await farebase.database().ref('categories').child(item).remove();
+        commit('setLoading', false);
+        commit('deleteCategory',item);
       } catch (error) {
         commit('setError', error.message);
         commit('setLoading', false);
@@ -54,21 +67,25 @@ export default{
   },
   mutations:{
     loadCategories(state,items){
-      console.log('load '+items);
-      state.categoiesAll = items;
+      state.categoriesAll = items;
     },
     createCategory(state,item){
-      console.log(typeof(state.categoiesAll));
-      state.categoiesAll.push(item);
+      state.categoriesAll.push(item);
+    },
+    deleteCategory(state,key){
+      let index = state.categoriesAll.findIndex(category => category.id === key);
+      if (index > -1) {
+        state.categoriesAll.splice(index, 1);
+      }
     }
   },
   getters:{
     categories(state){
-      return state.categoiesAll;
+      return state.categoriesAll;
     },
     categoryById (state) {
       return categoryId => {
-        return state.categoiesAll.find(category => category.id === categoryId)
+        return state.categoriesAll.find(category => category.id === categoryId)
       }
     }
   }
