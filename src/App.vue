@@ -31,7 +31,6 @@
     },
     beforeCreate(){
       firebase.auth().onAuthStateChanged(user => {
-          console.log('app check user');
         if (user) {
           this.$store.dispatch('checkUser', user);
         }
