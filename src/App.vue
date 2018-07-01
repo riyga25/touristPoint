@@ -38,6 +38,7 @@
       });
 
       this.$store.dispatch('fetchAds');
+      this.$store.dispatch('fetchCategories');
     }
 	}
 </script>

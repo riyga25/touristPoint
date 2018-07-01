@@ -2,12 +2,12 @@ import * as fb from 'firebase'
 
 class Ad {
   constructor (title, description, ownerId, imageSrc = '', promo = false, id = null) {
-    this.title = title;
-    this.description = description;
-    this.ownerId = ownerId;
-    this.imageSrc = imageSrc;
-    this.promo = promo;
-    this.id = id;
+    this.title = title
+    this.description = description
+    this.ownerId = ownerId
+    this.imageSrc = imageSrc
+    this.promo = promo
+    this.id = id
   }
 }
 
@@ -57,6 +57,7 @@ export default {
           imageSrc
         });
 
+
         commit('setLoading', false);
         commit('createAd', {
           ...newAd,
@@ -64,8 +65,8 @@ export default {
           imageSrc
         })
       } catch (error) {
-        commit('setError', error.message);
-        commit('setLoading', false);
+        commit('setError', error.message)
+        commit('setLoading', false)
         throw error
       }
     },

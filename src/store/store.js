@@ -4,6 +4,7 @@ import map from './modules/map';
 import ads from './modules/ads'
 import user from './modules/user'
 import shared from './modules/shared'
+import categories from './modules/categories'
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
         map,
         ads,
         user,
-        shared
+        shared,
+        categories
     },
 });

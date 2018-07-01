@@ -78,8 +78,7 @@
         promo: false,
         valid: false,
         image: null,
-        imageSrc: '',
-        coords: ''
+        imageSrc: ''
       }
     },
     computed: {
@@ -94,12 +93,12 @@
             title: this.title,
             description: this.description,
             promo: this.promo,
-            image: this.image,
+            image: this.image
           };
 
           this.$store.dispatch('createAd', ad)
             .then(() => {
-              this.$router.push('/places');
+              this.$router.push('/places')
             })
             .catch(() => {})
         }

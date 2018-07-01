@@ -19,7 +19,6 @@ router.beforeEach((to, from, next) => {
     if(requiresAuth){
         if(user){
             store.dispatch('checkUser',user);
-            console.log('then');
             checkUser = store.getters.user;
 
             if(checkUser === requiresAuth){
@@ -35,7 +34,5 @@ router.beforeEach((to, from, next) => {
     }else{
         next();
     }
-
-    console.log('!!@ '+checkUser);
 });
 export default router;
