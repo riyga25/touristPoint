@@ -28,7 +28,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="blue darken-1" flat @click.native="close()">Сбросить фильтры</v-btn>
-            <v-btn color="blue darken-1" flat @click.native="close()">Применить</v-btn>
+            <v-btn color="blue darken-1" flat @click.native="applyFiler()">Применить</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -50,6 +50,10 @@
     },
     methods: {
       close() {
+        this.$emit('close');
+      },
+	  applyFiler() {
+	    alert(this.$store.getters.currentCoords);
         this.$emit('close');
       },
     },

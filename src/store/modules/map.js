@@ -2,12 +2,16 @@ export default {
     state:
       {
         map: null,
+		currentCoords: [],
         defaultPlaceIcon: 'islands#redDotIcon',
         placeCategoryMap: {
             1: 'islands#blueFoodCircleIcon', 2: 'islands#blueFoodCircleIcon', 3: 'islands#blueCinemaCircleIcon', 4: 'islands#blueBarCircleIcon'
         }
     },
     mutations: {
+		setCurrentCoords(state, newCoords){
+			state.currentCoords = newCoords;
+		},
         setMap: (state) =>
         {
             if (state.map)
@@ -52,5 +56,10 @@ export default {
                 return error;
             });
         }
-    }
+    },
+	getters: {
+		currentCoords(state) {		  
+		    return state.currentCoords;						
+		}
+	}
 }

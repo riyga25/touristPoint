@@ -11,10 +11,10 @@
 </template>
 
 <script>
-	import Header from "./components/Header";
-	import firebase from "firebase";
+import Header from "./components/Header";
+import firebase from "firebase";
 
-    export default {
+export default {
 		name: "App",
     components: {Header},
     data(){
@@ -22,6 +22,19 @@
         transitionType : 'slide-left'
       }
     },
+	methods: {
+	  updMyCoords() {
+        setInterval(() => {
+		  var geolocation = window.ymaps.geolocation;
+		  geolocation.get({
+            provider: 'auto',
+            mapStateAutoApply: false
+          }).then((result) => {                   
+		    this.$store.commit('setCurrentCoords', result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData.InternalToponymInfo.Point.coordinates);           
+		  });	   
+        }, 3000); 
+      }
+	},
     watch: {
       '$route' (to, from) {
         const toDepth = to.path.split('/').length;
@@ -38,8 +51,11 @@
 
       this.$store.dispatch('fetchAds');
       this.$store.dispatch('fetchCategories');
-    }
+    },
+	created() {
+	  this.updMyCoords();
 	}
+}
 </script>
 
 <style lang="scss" scoped>
