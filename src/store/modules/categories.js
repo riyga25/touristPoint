@@ -35,15 +35,14 @@ export default{
         throw error
       }
     },
-    async createCategory ({commit}, item) {
+    async createCategory ({commit}, newItem) {
       commit('clearError');
       commit('setLoading', true);
 
       try {
-        let category = await farebase.database().ref('categories').push(item);
+        let category = await farebase.database().ref('categories').push(newItem);
         commit('setLoading', false);
-        item.id = category.key;
-        commit('createCategory',item);
+        commit('createCategory',newItem);
       } catch (error) {
         commit('setError', error.message);
         commit('setLoading', false);
