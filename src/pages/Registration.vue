@@ -13,6 +13,7 @@
                 name="phone"
                 label="Телефон"
                 type="tel"
+                required
                 v-model="phone"
                 :rules="phoneRules"
               ></v-text-field>
@@ -21,6 +22,7 @@
                 name="email"
                 label="Почта"
                 type="email"
+                required
                 v-model="email"
                 :rules="emailRules"
               ></v-text-field>
@@ -28,6 +30,7 @@
                 prepend-icon="lock"
                 name="password"
                 label="Пароль"
+                required
                 type="password"
                 :counter="6"
                 v-model="password"
@@ -37,6 +40,7 @@
                 prepend-icon="lock"
                 name="confirm-password"
                 label="Повторите пароль"
+                required
                 type="password"
                 :counter="6"
                 v-model="confirmPassword"
@@ -45,9 +49,11 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
+            <div class="reg-text">* поле обязательно для заполнения</div>
             <v-spacer></v-spacer>
             <v-btn
               color="primary"
+              class="reg-button"
               @click="onSubmit"
               :loading="loading"
               :disabled="!valid || loading"
@@ -110,3 +116,13 @@
     }
   }
 </script>
+<style>
+  .reg-button{
+    min-width: 165px;
+  }
+  .reg-text{
+    margin-left: 10px;
+    font-size: 12px;
+    color: rgba(0,0,0,.87);
+  }
+</style>
