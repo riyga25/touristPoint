@@ -4,7 +4,6 @@
       <v-dialog v-model="dialog" persistent max-width="500px">
         <v-btn slot="activator" color="primary" dark>Добавить категорию</v-btn>
         <v-card>
-          <v-form ref="form">
             <v-card-title>
               <span class="headline">Новая категория</span>
             </v-card-title>
@@ -34,10 +33,9 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" @click="clearForm" dark flat @click.native="dialog = false">Закрыть</v-btn>
+              <v-btn color="primary" dark flat @click.native="dialog = false">Закрыть</v-btn>
               <v-btn color="primary" dark flat @click="submit(category)" @click.native="dialog = false">Добавить</v-btn>
             </v-card-actions>
-          </v-form>
         </v-card>
       </v-dialog>
     </v-layout>
@@ -84,15 +82,10 @@
       },
       methods:{
         submit(newCategory){
-          this.$store.dispatch('createCategory',newCategory).then(()=>{
-              this.clearForm();
-          });
+          this.$store.dispatch('createCategory',newCategory);
         },
         deleteCategory(itemId){
           this.$store.dispatch('deleteCategory',itemId);
-        },
-        clearForm(){
-          this.$refs.form.reset()
         }
       }
     }

@@ -41,6 +41,7 @@ export default{
 
       try {
         let category = await farebase.database().ref('categories').push(newItem);
+        newItem.id = category.key;
         commit('setLoading', false);
         commit('createCategory',newItem);
       } catch (error) {
@@ -69,6 +70,7 @@ export default{
       state.categoriesAll = items;
     },
     createCategory(state,item){
+        console.log('mutation '+ item.name);
       state.categoriesAll.push(item);
     },
     deleteCategory(state,key){
