@@ -30,7 +30,7 @@ export default {
             provider: 'auto',
             mapStateAutoApply: false
           }).then((result) => {                   
-		    this.$store.commit('setCurrentCoords', result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData.InternalToponymInfo.Point.coordinates);           
+		    this.$store.commit('setCurrentCoords', result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData.InternalToponymInfo.Point.coordinates.reverse());           
 		  });	   
         }, 3000); 
       }
