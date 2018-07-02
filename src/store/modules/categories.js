@@ -39,11 +39,13 @@ export default{
       commit('clearError');
       commit('setLoading', true);
 
+      const currentItem = Object.assign({}, newItem);
+
       try {
-        let category = await farebase.database().ref('categories').push(newItem);
-        newItem.id = category.key;
+        let category = await farebase.database().ref('categories').push(currentItem);
+        currentItem.id = category.key;
         commit('setLoading', false);
-        commit('createCategory',newItem);
+        commit('createCategory',currentItem);
       } catch (error) {
         commit('setError', error.message);
         commit('setLoading', false);
