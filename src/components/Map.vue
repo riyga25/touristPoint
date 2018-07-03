@@ -26,6 +26,22 @@
 	    return this.$store.getters.places;
 	  }
 	},
+	watch: {
+	  filteredPlaces: function (newValue, oldValue) {
+        if (this.showplaces) {
+		  ymaps.ready(() =>
+            {
+              for (var i = 0; i < (this.filteredPlaces.length); i++){                  
+              const pm = new ymaps.Placemark(this.filteredPlaces[i].coords, {
+                hintContent: this.filteredPlaces[i].title,
+                balloonContent: this.filteredPlaces[i].decsription
+              });
+			  this.map.geoObjects.add(pm);                                    
+            }
+          });		
+	    }  			
+      }
+	},
     created() {	  
       this.$store.dispatch('getMap').then(map => {
         this.map = map;
@@ -44,16 +60,7 @@
 			  this.map.geoObjects.add(pm);
               this.$emit('map-clicked', e.get('coords'));
             });
-          }		  
-		  if (this.showplaces) {         
-			for (var i = 0; i < (this.filteredPlaces.length); i++){                  
-              const pm = new ymaps.Placemark(this.filteredPlaces[i].coords, {
-                  hintContent: this.filteredPlaces[i].title,
-                  balloonContent: this.filteredPlaces[i].decsription
-              });
-			  this.map.geoObjects.add(pm);                                    
-            }			
-          }
+          }			  
         }
       })
     }
