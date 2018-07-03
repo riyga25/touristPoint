@@ -11,16 +11,16 @@
 			    <v-flex xs12 >
                   <v-select
                     :items="['кафе', 'бар', 'ресторан']"
-                    label="Категории"
+                    label="Категория"
                   ></v-select>
                   <h4>Минимальная оценка</h4>
 				  <star-rating :rating="4" :show-rating="false" v-bind:increment="0.5"
                                                v-bind:max-rating="5"
                                                inactive-color="#ddd"
-                                               active-color="#f00"
+                                               active-color="#00f"
                                                v-bind:star-size="16">
                                                </star-rating>
-				  <v-text-field label="Радиус" ></v-text-field>
+				  <v-text-field label="Радиус, м." ></v-text-field>
                 </v-flex>
               </v-layout>
             </v-container>

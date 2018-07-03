@@ -25,13 +25,17 @@ export default {
 	methods: {
 	  updMyCoords() {
         setInterval(() => {
-		  var geolocation = window.ymaps.geolocation;
-		  geolocation.get({
-            provider: 'auto',
-            mapStateAutoApply: false
-          }).then((result) => {                   
-		    this.$store.commit('setCurrentCoords', result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData.InternalToponymInfo.Point.coordinates.reverse());           
-		  });	   
+		  if(typeof window.ymaps !== "undefined") {
+		    if(typeof window.ymaps.geolocation !== "undefined") {
+		      var geolocation = window.ymaps.geolocation;
+		      geolocation.get({
+                provider: 'auto',
+                mapStateAutoApply: false
+              }).then((result) => {                   
+		        this.$store.commit('setCurrentCoords', result.geoObjects.get(0).properties.get('metaDataProperty').GeocoderMetaData.InternalToponymInfo.Point.coordinates.reverse());           
+		      });	
+		    }
+		  }
         }, 3000); 
       }
 	},
