@@ -10,7 +10,7 @@
               <v-layout align-center justify-center>
 			    <v-flex xs12 >
                   <v-select
-                    :items="['кафе', 'бар', 'ресторан']"
+				    :items= "categories"  
                     label="Категория"
                   ></v-select>
                   <h4>Минимальная оценка</h4>
@@ -46,6 +46,7 @@
 	props: ['dialog'],
 	data () {
       return {
+	    
       }
     },
     methods: {
@@ -58,7 +59,18 @@
       },
     },
     computed: {
-
+      categories() {
+	    var myCategories = [];
+	    for (var i = 0; i < (this.$store.getters.categories.length); i++){                  
+          myCategories.push(
+		    {
+			  'text': this.$store.getters.categories[i].name,
+		      'value': this.$store.getters.categories[i].id,
+		    }		  		  
+		  );                    
+        }
+	    return myCategories;		
+      },
     },
   };
 </script>
