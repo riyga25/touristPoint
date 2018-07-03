@@ -82,7 +82,10 @@
       },
       methods:{
         submit(newCategory){
-          this.$store.dispatch('createCategory',newCategory);
+          this.$store.dispatch('createCategory',newCategory).then(()=>{
+              this.category.name = '';
+              this.category.color = '';
+          })
         },
         deleteCategory(itemId){
           this.$store.dispatch('deleteCategory',itemId);
