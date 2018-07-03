@@ -1,12 +1,12 @@
 <template>
     <div class="places__map">
       <filters
-        :dialog="filters"
-        @close="closeModal"
+        :dialog="filters"		
+        @close="closeModal"		
       />
-      <yandex-map
-        :places="filteredPlaces"
+      <yandex-map        
         :controls="['zoomControl']"
+		:showplaces="true"
         @placemark-clicked="switchPlaceState"
       >
       </yandex-map>
@@ -33,8 +33,7 @@
           filters
         },
         data() {
-            return {
-              filteredPlaces: this.$store.getters.places,
+            return {              
               filters: false
             }
         },

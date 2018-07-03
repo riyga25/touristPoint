@@ -17,10 +17,16 @@
       center: {type: Array, default: () => [54.314680, 48.395923]},
       zoom: {type: Number, default: 12},
       clickable: {type: Boolean, default: false},
+	  showplaces: {type: Boolean, default: false},
       places: {type: Array},
       controls : {type: Array, default: () => ['zoomControl']},
     },
-    created() {
+    computed: {
+      filteredPlaces() {	    
+	    return this.$store.getters.places;
+	  }
+	},
+    created() {	  
       this.$store.dispatch('getMap').then(map => {
         this.map = map;
 
@@ -38,6 +44,15 @@
 			  this.map.geoObjects.add(pm);
               this.$emit('map-clicked', e.get('coords'));
             });
+          }		  
+		  if (this.showplaces) {         
+			for (var i = 0; i < (this.filteredPlaces.length); i++){                  
+              const pm = new ymaps.Placemark(this.filteredPlaces[i].coords, {
+                  hintContent: this.filteredPlaces[i].title,
+                  balloonContent: this.filteredPlaces[i].decsription
+              });
+			  this.map.geoObjects.add(pm);                                    
+            }			
           }
         }
       })

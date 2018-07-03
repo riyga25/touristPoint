@@ -54,7 +54,8 @@
         this.$emit('close');
       },
 	  applyFiler() {
-	    alert(this.$store.getters.currentCoords);
+	    //alert(this.$store.getters.currentCoords);
+		console.log(this.$store.getters.places);
         this.$emit('close');
       },
     },

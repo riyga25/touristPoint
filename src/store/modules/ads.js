@@ -163,6 +163,15 @@ export default {
       return adId => {
         return state.ads.find(ad => ad.id === adId)
       }
-    }
+    },
+	places (state) {      
+	  var adsRandCoords = []
+	  for (var i = 0; i < (state.ads.length); i++){                  
+          adsRandCoords.push(state.ads[i]); 
+          adsRandCoords[i].coords = [54.3 + (Math.random()*5)/100, 48.35 + (Math.random()*5)/100]  		  
+        }
+		//console.log(adsRandCoords);
+      return adsRandCoords;	  
+    },
   }
 }
