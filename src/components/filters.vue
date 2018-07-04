@@ -19,7 +19,7 @@
                                            active-color="#00f"
                                            v-bind:star-size="16">
                                            </star-rating>
-              <v-text-field label="Радиус, м." ></v-text-field>
+              <v-text-field label="Радиус, м." v-model="distance"></v-text-field>
             </v-flex>
           </v-layout>
         </v-container>
