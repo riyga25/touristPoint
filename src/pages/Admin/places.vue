@@ -1,25 +1,36 @@
 <template>
     <v-container>
       <v-layout row justify-center>
-        <v-flex xs12>
-          <v-list>
-            <v-list
-              v-for="item in places"
-              :key="item.id"
-              no-action
-              xs12
-            >
-              <v-list-tile>
-                <v-list-tile-content>
-                  <v-list-tile-title>{{ item.title}}</v-list-tile-title>
-                </v-list-tile-content>
-                <v-list-tile-action>
-                  <v-icon @click="deletePlace(item.id)">delete</v-icon>
-                </v-list-tile-action>
-              </v-list-tile>
-            </v-list>
-          </v-list>
-        </v-flex>
+        <v-card>
+          <v-card-title>
+            Места
+            <v-spacer></v-spacer>
+            <v-text-field
+                    v-model="search"
+                    append-icon="search"
+                    label="Поиск по месту"
+                    single-line
+                    hide-details
+            ></v-text-field>
+          </v-card-title>
+          <v-data-table
+                  :headers="headers"
+                  :items="places"
+                  :search="search"
+          >
+            <template slot="items" slot-scope="props">
+              <td>{{ props.item.title }}</td>
+              <td class="justify-end layout icon-delete text-xs-right">
+                <v-icon @click="deletePlace(props.item.id)">
+                  delete
+                </v-icon>
+              </td>
+            </template>
+            <v-alert slot="no-results" :value="true" color="error" icon="warning">
+              Поиск места "{{ search }}" не дал результатов.
+            </v-alert>
+          </v-data-table>
+        </v-card>
       </v-layout>
     </v-container>
 </template>
@@ -30,8 +41,13 @@
         data(){
             return{
                 headers:[
-                    {text: 'Название',value: 'title'},
-                ]
+                    {text: 'Название места',value: 'name'},
+                    {
+                        text:'',
+                        value:''
+                    }
+                ],
+                search:''
             }
         },
         computed:{
@@ -44,14 +60,21 @@
         },
       methods:{
           deletePlace(key){
-            this.$store.dispatch('deleteAd',key);
+            this.$store.dispatch('removeAd',key);
           }
       }
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   i{
     cursor: pointer;
+  }
+  .icon-delete{
+    i{
+      position: relative;
+      top: 50%;
+      transform: translateY(-12px);
+    }
   }
 </style>

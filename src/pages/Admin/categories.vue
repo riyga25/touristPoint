@@ -40,25 +40,36 @@
       </v-dialog>
     </v-layout>
     <v-layout row justify-center>
-      <v-flex xs12>
-        <v-list>
-          <v-list
-            v-for="item in categories"
-            :key="item.id"
-            no-action
-            xs12
-          >
-            <v-list-tile>
-              <v-list-tile-content>
-                <v-list-tile-title>{{ item.name }}</v-list-tile-title>
-              </v-list-tile-content>
-              <v-list-tile-action @click="deleteCategory(item.id)">
-                <v-icon>delete</v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
-          </v-list>
-        </v-list>
-      </v-flex>
+      <v-card>
+        <v-card-title>
+          Категории
+          <v-spacer></v-spacer>
+          <v-text-field
+                  v-model="search"
+                  append-icon="search"
+                  label="Поиск по категориям"
+                  single-line
+                  hide-details
+          ></v-text-field>
+        </v-card-title>
+        <v-data-table
+                :headers="headers"
+                :items="categories"
+                :search="search"
+        >
+          <template slot="items" slot-scope="props">
+            <td>{{ props.item.name }}</td>
+            <td class="justify-end layout icon-delete text-xs-right">
+              <v-icon @click="deleteCategory(props.item.id)">
+                delete
+              </v-icon>
+            </td>
+          </template>
+          <v-alert slot="no-results" :value="true" color="error" icon="warning">
+            Поиск категории "{{ search }}" не дал результатов.
+          </v-alert>
+        </v-data-table>
+      </v-card>
     </v-layout>
   </v-container>
 </template>
@@ -72,7 +83,19 @@
             name:'',
             color:''
           },
-          dialog: false
+          dialog: false,
+          search:'',
+          headers:[
+              {
+                  text: 'Название категории',
+                  value: 'name',
+                  sortable: false,
+              },
+              {
+                  text:'',
+                  value:''
+              }
+          ]
         }
       },
       computed:{
@@ -88,18 +111,25 @@
           })
         },
         deleteCategory(itemId){
-          this.$store.dispatch('deleteCategory',itemId);
+          this.$store.dispatch('deleteCategory',itemId) ;
         }
       }
     }
 </script>
 
-<style scoped>
+<style lang="scss">
   .dialog__container{
     margin-bottom: 20px;
   }
   i{
     cursor: pointer;
+  }
+  .icon-delete{
+    i{
+      position: relative;
+      top: 50%;
+      transform: translateY(-12px);
+    }
   }
   .list > .list{
     border-bottom: 1px solid #FBFBFB;
