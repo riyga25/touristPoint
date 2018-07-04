@@ -11,7 +11,11 @@ export default{
 
       try {
         const fbVal = await farebase.database().ref('categories').once('value');
-        const categories = fbVal.val();
+        let categories={};
+
+        if(fbVal.val()){
+          categories = fbVal.val();
+        }
 
         let newArr = [];
 

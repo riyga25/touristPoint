@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row>
       <v-flex xs12 sm6 offset-sm3>
-        <h1 class="text--secondary mb-3">Добавление новового места</h1>
+        <h1 class="text--secondary mb-3">Добавление нового места</h1>
         <v-form v-model="valid" ref="form" validation class="mb-3">
           <v-text-field
             name="title"
@@ -14,8 +14,9 @@
           ></v-text-field>
           <v-text-field
             name="description"
-            label="Опишите его"
+            label="Опишите его*"
             type="text"
+            required
             v-model="description"
             multi-line
             :rules="[v => !!v || 'Обязательное поле']"
@@ -24,7 +25,7 @@
         <v-layout row class="mb-3">
           <v-flex xs12>
             <v-btn class="warning" @click="triggerUpload">
-              Добавить фото
+              Добавить фото*
               <v-icon right dark>cloud_upload</v-icon>
             </v-btn>
             <input
