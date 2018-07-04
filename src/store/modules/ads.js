@@ -22,6 +22,7 @@ class Ad {
 
 export default {
   state: {
+	selectedCat: 0,
     ads: []
   },
   mutations: {
@@ -165,12 +166,13 @@ export default {
       }
     },
 	places (state) {      
-	  var adsRandCoords = []
-	  for (var i = 0; i < (state.ads.length); i++){                  
-          adsRandCoords.push(state.ads[i]); 
-          //adsRandCoords[i].coords = [54.3 + (Math.random()*5)/100, 48.35 + (Math.random()*5)/100]  		  
-        }		
-      return adsRandCoords;	  
+	  /*var adsFiltered = []
+	  adsFiltered = state.ads.filter(category => rating > state.minRating);
+	  if (this.selectedCat != 0){
+	    adsFiltered = state.ads.filter(category => category == state.selectedCat);
+	  }               		
+      return adsFiltered;	 */
+      return state.ads	  
     },
   }
 }
