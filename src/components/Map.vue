@@ -26,20 +26,33 @@
 	    return this.$store.getters.places;
 	  }
 	},
+	methods: {
+	  placeGeoObjects() {
+	    this.map.geoObjects.removeAll(); 
+	    for (var i = 0; i < (this.filteredPlaces.length); i++){                  
+          const pm = new ymaps.Placemark(this.filteredPlaces[i].coords, {
+            hintContent: this.filteredPlaces[i].title,
+            balloonContent: this.filteredPlaces[i].decsription
+          });
+		  this.map.geoObjects.add(pm);                                    
+        }
+	  }
+	},
 	watch: {
-	  filteredPlaces: function (newValue, oldValue) {
-        if (this.showplaces) {
+	  filteredPlaces: function (newValue, oldValue) {	  
+        if ((this.showplaces)&&(typeof ymaps != "undefined")) {
 		  ymaps.ready(() =>
             {
-              for (var i = 0; i < (this.filteredPlaces.length); i++){                  
-              const pm = new ymaps.Placemark(this.filteredPlaces[i].coords, {
-                hintContent: this.filteredPlaces[i].title,
-                balloonContent: this.filteredPlaces[i].decsription
-              });
-			  this.map.geoObjects.add(pm);                                    
-            }
-          });		
-	    }  			
+			  if (typeof this.map.geoObjects != "undefined"){
+                this.placeGeoObjects(); 
+			  } 
+            });		
+	    } 			
+      },
+	  map: function () {		  
+		if ((this.showplaces)&&(this.map)) {
+		  this.placeGeoObjects(); 
+		}			 
       }
 	},
     created() {	  
