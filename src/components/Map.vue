@@ -32,7 +32,7 @@
 	    for (var i = 0; i < (this.filteredPlaces.length); i++){                  
           const pm = new ymaps.Placemark(this.filteredPlaces[i].coords, {
             hintContent: this.filteredPlaces[i].title,
-            balloonContent: this.filteredPlaces[i].decsription
+            balloonContent: this.filteredPlaces[i].description
           });
 		  this.map.geoObjects.add(pm);                                    
         }
