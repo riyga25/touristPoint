@@ -44,7 +44,8 @@
                     {text: 'Название места',value: 'title',sortable: false},
                     {
                         text:'',
-                        value:''
+                        value:'',
+                        sortable: false
                     }
                 ],
                 search:''

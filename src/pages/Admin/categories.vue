@@ -10,19 +10,10 @@
             <v-card-text>
               <v-container grid-list-md>
                 <v-layout wrap>
-                  <v-flex xs12 sm5>
+                  <v-flex xs12>
                     <v-text-field
                       v-model="category.name"
                       label="Название"
-                      clearable
-                      required
-                      :rules="[v => !!v || 'Обязательное поле']"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm5>
-                    <v-text-field
-                      v-model="category.color"
-                      label="Цвет"
                       clearable
                       required
                       :rules="[v => !!v || 'Обязательное поле']"
@@ -80,8 +71,7 @@
       data(){
         return{
           category:{
-            name:'',
-            color:''
+            name:''
           },
           dialog: false,
           search:'',
@@ -93,7 +83,8 @@
               },
               {
                   text:'',
-                  value:''
+                  value:'',
+                  sortable: false
               }
           ]
         }
