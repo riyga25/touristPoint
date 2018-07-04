@@ -80,6 +80,9 @@
       .btn--floating .icon{
         height: 21px;
       }
+      .dialog__contaner{
+        margin-bottom: 0;
+      }
     }
 
     .places__scroll {
