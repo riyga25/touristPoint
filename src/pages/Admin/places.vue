@@ -41,7 +41,7 @@
         data(){
             return{
                 headers:[
-                    {text: 'Название места',value: 'name'},
+                    {text: 'Название места',value: 'title',sortable: false},
                     {
                         text:'',
                         value:''
