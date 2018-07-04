@@ -62,6 +62,12 @@
           deletePlace(key){
             this.$store.dispatch('removeAd',key);
           }
+      },
+      mounted(){
+          let places = this.$store.state.ads.ads;
+          if(!places.length){
+              this.$store.dispatch('fetchAds');
+          }
       }
     }
 </script>

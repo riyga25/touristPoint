@@ -113,6 +113,12 @@
         deleteCategory(itemId){
           this.$store.dispatch('deleteCategory',itemId) ;
         }
+      },
+      mounted(){
+          let category = this.$store.state.categoriesAll;
+          if(!category){
+              this.$store.dispatch('fetchCategories');
+          }
       }
     }
 </script>
