@@ -42,7 +42,7 @@
 		} else {		  
 		  this.myPoint.removeAll();
 		}
-	    const me = new ymaps.Placemark([54.314680, 48.395923], {
+	    const me = new ymaps.Placemark(this.currentCoords, {
             hintContent: 'Я здесь',
             balloonContent: 'Мое местоположние: ' + this.$store.getters.currentCoords[0] + ' : ' + this.$store.getters.currentCoords[1]
         }, {
@@ -50,7 +50,7 @@
             iconColor: '#000080'
         });
 		this.myPoint.add(me); 		
-		var circle = new ymaps.Circle([[54.314680, 48.395923], this.distance], {}, {geodesic: true, 
+		var circle = new ymaps.Circle([this.currentCoords, this.distance], {}, {geodesic: true, 
 		                                                                   fillColor: "#4161E1",
                                                                            fillOpacity: 0.2,
                                                                            strokeColor: "#000080",
