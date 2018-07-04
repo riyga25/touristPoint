@@ -6,6 +6,7 @@
   export default {
     data() {
       return {
+	    circledPlaces: [],
 	    myPoint: null,
         map: {
           type: Object
@@ -26,8 +27,11 @@
       filteredPlaces() {	    
 	    return this.$store.getters.places;
 	  },
-	  currentCoords(){
+	  currentCoords() {
 	    return this.$store.getters.currentCoords;
+	  },
+	  distance() {
+	    return this.$store.getters.distance;	    
 	  },
 	},
 	methods: {
@@ -45,8 +49,8 @@
             preset: 'islands#dotIcon',
             iconColor: '#000080'
         });
-		this.myPoint.add(me); 
-		var circle = new ymaps.Circle([[54.314680, 48.395923], 1500], {}, {geodesic: true, 
+		this.myPoint.add(me); 		
+		var circle = new ymaps.Circle([[54.314680, 48.395923], this.distance], {}, {geodesic: true, 
 		                                                                   fillColor: "#4161E1",
                                                                            fillOpacity: 0.2,
                                                                            strokeColor: "#000080",
@@ -83,6 +87,11 @@
       },
 	  currentCoords: function (newVal, oldVal) {	    
 	    if ((this.showplaces)&&(this.map)&&((parseFloat(newVal).toFixed(6)!= parseFloat(oldVal).toFixed(6)))) {
+	      this.showMe();
+		}
+	  },
+	  distance: function (newVal, oldVal) {	    
+	    if ((this.showplaces)&&(this.map)&&(newVal != oldVal)) {
 	      this.showMe();
 		}
 	  }

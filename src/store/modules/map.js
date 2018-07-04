@@ -2,6 +2,7 @@ export default {
     state:
       {
         map: null,
+		distance: 500,
 		currentCoords: [],
         defaultPlaceIcon: 'islands#redDotIcon',
         placeCategoryMap: {
@@ -11,6 +12,9 @@ export default {
     mutations: {
 		setCurrentCoords(state, newCoords){
 			state.currentCoords = newCoords;
+		},
+		setDistance(state, newDistance){
+			state.distance = newDistance;
 		},
         setMap: (state) =>
         {
@@ -60,6 +64,9 @@ export default {
 	getters: {
 		currentCoords(state) {		  
 		    return state.currentCoords;						
+		},
+		distance(state) {		  
+		    return state.distance;						
 		}
 	}
 }
