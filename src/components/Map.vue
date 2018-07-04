@@ -6,6 +6,7 @@
   export default {
     data() {
       return {
+	    myPoint: null,
         map: {
           type: Object
         }
@@ -24,9 +25,35 @@
     computed: {
       filteredPlaces() {	    
 	    return this.$store.getters.places;
-	  }
+	  },
+	  currentCoords(){
+	    return this.$store.getters.currentCoords;
+	  },
 	},
 	methods: {
+	  showMe(){
+	    if (this.myPoint == null){
+		  this.myPoint = new ymaps.GeoObjectCollection();
+		  this.map.geoObjects.add(this.myPoint);
+		} else {		  
+		  this.myPoint.removeAll();
+		}
+	    const me = new ymaps.Placemark([54.314680, 48.395923], {
+            hintContent: 'Я здесь',
+            balloonContent: 'Мое местоположние: ' + this.$store.getters.currentCoords[0] + ' : ' + this.$store.getters.currentCoords[1]
+        }, {
+            preset: 'islands#dotIcon',
+            iconColor: '#000080'
+        });
+		this.myPoint.add(me); 
+		var circle = new ymaps.Circle([[54.314680, 48.395923], 1500], {}, {geodesic: true, 
+		                                                                   fillColor: "#4161E1",
+                                                                           fillOpacity: 0.2,
+                                                                           strokeColor: "#000080",
+                                                                           strokeOpacity: 0.5,
+                                                                           strokeWidth: 1 });       
+        this.myPoint.add(circle);
+	  },
 	  placeGeoObjects() {
 	    this.map.geoObjects.removeAll(); 
 	    for (var i = 0; i < (this.filteredPlaces.length); i++){                  
@@ -35,11 +62,11 @@
             balloonContent: this.filteredPlaces[i].description
           });
 		  this.map.geoObjects.add(pm);                                    
-        }
+        }		
 	  }
 	},
 	watch: {
-	  filteredPlaces: function (newValue, oldValue) {	  
+	  filteredPlaces: function () {	  
         if ((this.showplaces)&&(typeof ymaps != "undefined")) {
 		  ymaps.ready(() =>
             {
@@ -53,7 +80,12 @@
 		if ((this.showplaces)&&(this.map)) {
 		  this.placeGeoObjects(); 
 		}			 
-      }
+      },
+	  currentCoords: function (newVal, oldVal) {	    
+	    if ((this.showplaces)&&(this.map)&&((parseFloat(newVal).toFixed(6)!= parseFloat(oldVal).toFixed(6)))) {
+	      this.showMe();
+		}
+	  }
 	},
     created() {	  
       this.$store.dispatch('getMap').then(map => {
@@ -61,8 +93,7 @@
 
         if (this.map) {
           this.map.setCenter(this.center, this.zoom);
-          //this.addPlacemarks();
-
+          
           if (this.clickable) {
             this.map.events.add('click', (e) => {
 			  this.map.geoObjects.removeAll();
