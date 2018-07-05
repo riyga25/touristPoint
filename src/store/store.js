@@ -5,6 +5,7 @@ import ads from './modules/ads'
 import user from './modules/user'
 import shared from './modules/shared'
 import categories from './modules/categories'
+import admin from './modules/admin'
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
         ads,
         user,
         shared,
-        categories
+        categories,
+        admin
     },
 });

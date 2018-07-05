@@ -1,5 +1,4 @@
 import * as fb from 'firebase';
-import router from 'vue-router';
 
 class User {
   constructor (id) {
