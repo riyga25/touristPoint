@@ -41,15 +41,7 @@
 		  this.map.geoObjects.add(this.myPoint);
 		} else {		  
 		  this.myPoint.removeAll();
-		}
-	    const me = new ymaps.Placemark(this.currentCoords, {
-            hintContent: 'Я здесь',
-            balloonContent: 'Мое местоположние: ' + this.$store.getters.currentCoords[0] + ' : ' + this.$store.getters.currentCoords[1]
-        }, {
-            preset: 'islands#dotIcon',
-            iconColor: '#000080'
-        });
-		this.myPoint.add(me); 		
+		}	     		
 		var circle = new ymaps.Circle([this.currentCoords, this.distance], {}, {geodesic: true, 
 		                                                                   fillColor: "#4161E1",
                                                                            fillOpacity: 0.2,
@@ -57,6 +49,30 @@
                                                                            strokeOpacity: 0.5,
                                                                            strokeWidth: 1 });       
         this.myPoint.add(circle);
+		var pointList = [];
+		for (var i = 0; i < (this.filteredPlaces.length); i++){
+		    
+		    pointList.push(
+			  {
+			    type: 'Point',
+			    coordinates: this.filteredPlaces[i].coords
+			  }
+			);
+		 
+		}		
+		var objects = ymaps.geoQuery(this.map.geoObjects).searchInside(circle);
+		
+		this.circledPlaces = [];		
+		objects.each(function(pm) {console.log(pm.properties.get('hintContent'));});		
+		
+		const me = new ymaps.Placemark(this.currentCoords, {
+            hintContent: 'Я здесь',
+            balloonContent: 'Мое местоположние: ' + this.$store.getters.currentCoords[0] + ' : ' + this.$store.getters.currentCoords[1]
+        }, {
+            preset: 'islands#dotIcon',
+            iconColor: '#000080'
+        });
+		this.myPoint.add(me);
 	  },
 	  placeGeoObjects() {
 	    this.map.geoObjects.removeAll(); 
