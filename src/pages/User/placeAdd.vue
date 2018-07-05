@@ -14,7 +14,7 @@
           ></v-text-field>
           <v-text-field
             name="description"
-            label="Опишите его*"
+            label="Опишите его"
             type="text"
             required
             v-model="description"

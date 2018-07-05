@@ -1,4 +1,5 @@
-import * as fb from 'firebase'
+import * as fb from 'firebase';
+import router from 'vue-router';
 
 class User {
   constructor (id) {
@@ -34,18 +35,17 @@ export default {
       commit('clearError');
       commit('setLoading', true);
       try {
-        const user = await fb.auth().createUserWithEmailAndPassword(email, password).then(newUser=>{
-          let arr = {}
+        await fb.auth().createUserWithEmailAndPassword(email, password).then(newUser=>{
+          let arr = {};
           arr.email = newUser.user.email;
           arr.uid = newUser.user.uid;
           arr.emailVerified = newUser.user.emailVerified;
           arr.blocked = false;
           fb.database().ref('users').push(arr);
+
+          commit('checkUser', newUser.user.email);
+          commit('setLoading', false);
         });
-        commit('checkUser', user.user.email);
-        commit('setId', user.user.uid);
-        commit('setLoading', false)
-        this.$router.push('/')
       } catch (error) {
         commit('setLoading', false);
         commit('setError', error.message);

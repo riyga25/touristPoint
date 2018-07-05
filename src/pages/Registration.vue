@@ -104,12 +104,13 @@
           const user = {
             email: this.email,
             password: this.password
-          }
+          };
 
           this.$store.dispatch('registerUser', user)
             .then(() => {
-              this.$router.push('/')
+              this.$router.push('/');
             })
+
             .catch(() => {})
         }
       }
