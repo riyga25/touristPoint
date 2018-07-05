@@ -26,7 +26,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" flat @click.native="close()">Сбросить фильтры</v-btn>
+        <v-btn color="blue darken-1" flat @click.native="setDafaultFilter()">Сбросить фильтры</v-btn>
         <v-btn color="blue darken-1" flat @click.native="applyFiler()">Применить</v-btn>
       </v-card-actions>
     </v-card>
@@ -48,12 +48,11 @@
       }
     },
     methods: {
-      close() {
+      setDafaultFilter() {
+	    this.distance = 500;
         this.$emit('close');
       },
-	  applyFiler() {
-	    //alert(this.$store.getters.currentCoords);
-		console.log(this.$store.getters.places);
+	  applyFiler() {		
         this.$emit('close');
       },
     },
