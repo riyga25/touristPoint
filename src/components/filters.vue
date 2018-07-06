@@ -49,7 +49,7 @@
     },
     methods: {
       setDafaultFilter() {
-	    this.distance = 500;
+	    this.distanceFilter = 500;
         this.$emit('close');
       },
 	  applyFiler() {	
