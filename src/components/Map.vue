@@ -26,16 +26,16 @@
       controls : {type: Array, default: () => ['zoomControl']},
     },
     computed: {
-      filteredPlaces() {	    
+      filteredPlaces() {
 	    return this.$store.getters.places;
+      },
+      currentCoords() {
+        return this.$store.getters.currentCoords;
+      },
+      distance() {
+        return this.$store.getters.distance;	    
+      },
 	  },
-	  currentCoords() {
-	    return this.$store.getters.currentCoords;
-	  },
-	  distance() {
-	    return this.$store.getters.distance;	    
-	  },
-	},
 	methods: {
 	  showMe(){
 	    if (this.myPoint == null){
@@ -57,15 +57,15 @@
       let objects = ymaps.geoQuery([
           {
               type: 'Point',
-              coordinates: [55.73, 37.75],
+              coordinates: [54.334088, 48.426359],
           },
           {
               type: 'Point',
-              coordinates: [55.10, 37.45],
+              coordinates: [54.331580, 48.463009],
           },
           {
               type: 'Point',
-              coordinates: [55.25, 37.35],
+              coordinates: [54.328018, 48.411081],
           }
         ]).addToMap(this.map);
         // конец временной переменной
@@ -87,9 +87,10 @@
       // попытка следить за кругом
       circle.events.add('drag',()=>{
         var objectsInsideCircle = objects.searchInside(circle);
-        // console.log(this.filteredPlaces);
 
         if(objectsInsideCircle._objects.length > 0){
+                  console.log(this.filteredPlaces);
+        console.log(objects);
           
           Push.create("touristPoint", {
           body: "Рядом с вами обнарушено заведение",
