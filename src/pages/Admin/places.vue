@@ -8,7 +8,7 @@
             <v-text-field
                     v-model="search"
                     append-icon="search"
-                    label="Поиск по месту"
+                    label="Поиск"
                     single-line
                     hide-details
             ></v-text-field>

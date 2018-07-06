@@ -6,7 +6,7 @@
       />
       <yandex-map        
         :controls="['zoomControl']"
-		:showplaces="true"
+		    :showplaces="true"
         @placemark-clicked="switchPlaceState"
       >
       </yandex-map>

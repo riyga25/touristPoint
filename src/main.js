@@ -3,6 +3,7 @@ import vuetify from 'vuetify'
 import firebase from 'firebase'
 import router from './routing/router';
 import store from './store/store';
+import 'push.js';
 
 import App from './App.vue';
 
