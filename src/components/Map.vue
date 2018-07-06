@@ -41,6 +41,42 @@
 	    if (this.myPoint == null){
 		  this.myPoint = new ymaps.GeoObjectCollection();
 		  this.map.geoObjects.add(this.myPoint);
+		} else {		  
+		  this.myPoint.removeAll();
+		}	     		
+		var circle = new ymaps.Circle([this.currentCoords, this.distance], {}, {geodesic: true, 
+		                                                                   fillColor: "#4161E1",
+                                                                           fillOpacity: 0.2,
+                                                                           strokeColor: "#000080",
+                                                                           strokeOpacity: 0.5,
+                                                                           strokeWidth: 1 });       
+        this.myPoint.add(circle);
+		var pointList = [];
+		for (var i = 0; i < (this.filteredPlaces.length); i++){
+		    
+		    pointList.push(
+			  {
+			    type: 'Point',
+			    coordinates: this.filteredPlaces[i].coords
+			  }
+			);
+		 
+		}		
+		var objects = ymaps.geoQuery(this.map.geoObjects).searchInside(circle); 
+		
+		objects.each(function(pm) {//для каждого из результата выборки geoQuery
+		  console.log(pm.properties.get('hintContent'));//здесь pm-это как раз наши placemark-и, просто берем у них hintContent и выводим в консоль
+		});		
+		
+		const me = new ymaps.Placemark(this.currentCoords, {
+            hintContent: 'Я здесь',
+            balloonContent: 'Мое местоположние: ' + this.$store.getters.currentCoords[0] + ' : ' + this.$store.getters.currentCoords[1]
+        }, {
+            preset: 'islands#dotIcon',
+            iconColor: '#000080'
+        });
+		this.myPoint.add(me);
+/*=======
       } else {		  
         this.myPoint.removeAll();
       }
@@ -67,6 +103,7 @@
         }
       );
       this.myPoint.add(circle);
+>>>>>>> 5f8dc5126c78160ce22308edeff5044ca50a721f*/
 	  },
 	  placeGeoObjects() {
 	    this.map.geoObjects.removeAll(); 
