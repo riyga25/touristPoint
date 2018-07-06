@@ -8,7 +8,8 @@ class Ad {
     imageSrc = '',
     coords = [],
     promo = false,
-    id = null
+    id = null,
+    inCircle = false,
   }) {
     this.title = title
     this.description = description
@@ -17,6 +18,7 @@ class Ad {
     this.promo = promo
     this.id = id
     this.coords = coords
+    this.inCircle = inCircle
   }
 }
 
@@ -101,7 +103,8 @@ export default {
           resultAds.push(
             new Ad({
               ...ad,
-              id: key
+              id: key,
+              inCircle: false
             })
           )
         });

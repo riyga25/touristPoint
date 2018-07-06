@@ -16,7 +16,7 @@
               <star-rating :rating="4" :show-rating="false" v-bind:increment="0.5"
                                            v-bind:max-rating="5"
                                            inactive-color="#ddd"
-                                           active-color="#ff0"
+                                           active-color="#FFB300"
                                            v-bind:star-size="16">
                                            </star-rating>
               <v-text-field label="Радиус, м." v-model="distance"></v-text-field>

@@ -38,7 +38,7 @@
           <v-text-field
                   v-model="search"
                   append-icon="search"
-                  label="Поиск по категориям"
+                  label="Поиск"
                   single-line
                   hide-details
           ></v-text-field>
