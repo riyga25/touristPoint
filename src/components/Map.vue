@@ -53,23 +53,6 @@
           });
       this.myPoint.add(me);
       
-      // временная переменная, массив должен быть такого вида 
-      let objects = ymaps.geoQuery([
-          {
-              type: 'Point',
-              coordinates: [54.334088, 48.426359],
-          },
-          {
-              type: 'Point',
-              coordinates: [54.331580, 48.463009],
-          },
-          {
-              type: 'Point',
-              coordinates: [54.328018, 48.411081],
-          }
-        ]).addToMap(this.map);
-        // конец временной переменной
-      
       var circle = new ymaps.Circle(
         [this.currentCoords, this.distance], 
         {}, 
@@ -80,31 +63,9 @@
           strokeColor: "#000080",
           strokeOpacity: 0.5,
           strokeWidth: 1,
-          draggable: true //убрать потом
+          draggable: true //убрать потом!!!
         }
       );
-
-      // попытка следить за кругом
-      circle.events.add('drag',()=>{
-        var objectsInsideCircle = objects.searchInside(circle);
-
-        if(objectsInsideCircle._objects.length > 0){
-                  console.log(this.filteredPlaces);
-        console.log(objects);
-          
-          Push.create("touristPoint", {
-          body: "Рядом с вами обнарушено заведение",
-          timeout: 4000,
-          onClick: function () {
-              window.focus();
-              this.close();
-          }
-          });
-        }
-        objectsInsideCircle.setOptions('preset', 'islands#redIcon');
-        objects.remove(objectsInsideCircle).setOptions('preset', 'islands#blueIcon');
-      });
-      
       this.myPoint.add(circle);
 	  },
 	  placeGeoObjects() {
@@ -120,20 +81,19 @@
 	},
 	watch: {
 	  filteredPlaces: function () {	  
-        if ((this.showplaces)&&(typeof ymaps != "undefined")) {
-		  ymaps.ready(() =>
-            {
-			  if (typeof this.map.geoObjects != "undefined"){
-                this.placeGeoObjects(); 
-			  } 
-            });		
-	    } 			
-      },
-	  map: function () {		  
-		if ((this.showplaces)&&(this.map)) {
-		  this.placeGeoObjects(); 
-		}			 
-      },
+      if ((this.showplaces)&&(typeof ymaps != "undefined")) {
+        ymaps.ready(() =>{
+          if (typeof this.map.geoObjects != "undefined"){
+            this.placeGeoObjects();
+          } 
+        });		
+      } 			
+    },
+    map: function () {		  
+    if ((this.showplaces)&&(this.map)) {
+      this.placeGeoObjects(); 
+    }			 
+    },
 	  currentCoords: function (newVal, oldVal) {	    
 	    if ((this.showplaces)&&(this.map)&&((parseFloat(newVal).toFixed(6)!= parseFloat(oldVal).toFixed(6)))) {
 	      this.showMe();
