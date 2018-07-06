@@ -60,10 +60,11 @@
 			);
 		 
 		}		
-		var objects = ymaps.geoQuery(this.map.geoObjects).searchInside(circle);
+		var objects = ymaps.geoQuery(this.map.geoObjects).searchInside(circle); 
 		
-		this.circledPlaces = [];		
-		objects.each(function(pm) {console.log(pm.properties.get('hintContent'));});		
+		objects.each(function(pm) {//для каждого из результата выборки geoQuery
+		  console.log(pm.properties.get('hintContent'));//здесь pm-это как раз наши placemark-и, просто берем у них hintContent и выводим в консоль
+		});		
 		
 		const me = new ymaps.Placemark(this.currentCoords, {
             hintContent: 'Я здесь',
