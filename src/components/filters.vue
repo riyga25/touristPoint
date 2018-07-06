@@ -19,7 +19,7 @@
                                            active-color="#FFB300"
                                            v-bind:star-size="16">
                                            </star-rating>
-              <v-text-field label="Радиус, м." v-model="distance"></v-text-field>
+              <v-text-field label="Радиус, м." v-model="distanceFilter"></v-text-field>
             </v-flex>
           </v-layout>
         </v-container>
@@ -44,7 +44,7 @@
 	props: ['dialog'],
 	data () {
       return {
-	    
+	    distanceFilter: 500,
       }
     },
     methods: {
@@ -52,7 +52,8 @@
 	    this.distance = 500;
         this.$emit('close');
       },
-	  applyFiler() {		
+	  applyFiler() {	
+        this.distance = this.distanceFilter;	  
         this.$emit('close');
       },
     },
