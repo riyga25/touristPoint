@@ -49,7 +49,7 @@
                                                                            fillOpacity: 0.2,
                                                                            strokeColor: "#000080",
                                                                            strokeOpacity: 0.5,
-                                                                           strokeWidth: 1 });       
+                                                                           strokeWidth: 1});       
         this.myPoint.add(circle);
 		var pointList = [];
 		for (var i = 0; i < (this.filteredPlaces.length); i++){
@@ -63,10 +63,17 @@
 		 
 		}		
 		var objects = ymaps.geoQuery(this.map.geoObjects).searchInside(circle); 
-		
-		objects.each(function(pm) {//для каждого из результата выборки geoQuery
-		  console.log(pm.properties.get('hintContent'));//здесь pm-это как раз наши placemark-и, просто берем у них hintContent и выводим в консоль
-		});		
+
+    if(objects._objects.length > 0){
+      Push.create("Места поблизости", {
+        body: "Найдено мест: "+objects._objects.length,
+        icon: '/static/img/icons/android-chrome-192x192.png',
+        onClick: function () {
+          window.focus();
+          this.close();
+        }
+      });
+    }
 		
 		const me = new ymaps.Placemark(this.currentCoords, {
             hintContent: 'Я здесь',
@@ -76,34 +83,6 @@
             iconColor: '#000080'
         });
 		this.myPoint.add(me);
-/*=======
-      } else {		  
-        this.myPoint.removeAll();
-      }
-        const me = new ymaps.Placemark(this.currentCoords,{
-              hintContent: 'Я здесь',
-              balloonContent: 'Мое местоположние: ' + this.$store.getters.currentCoords[0] + ' : ' + this.$store.getters.currentCoords[1]
-          }, {
-              preset: 'islands#dotIcon',
-              iconColor: '#000080'
-          });
-      this.myPoint.add(me);
-      
-      var circle = new ymaps.Circle(
-        [this.currentCoords, this.distance], 
-        {}, 
-        {
-          geodesic: true, 
-          fillColor: "#4161E1",
-          fillOpacity: 0.2,
-          strokeColor: "#000080",
-          strokeOpacity: 0.5,
-          strokeWidth: 1,
-          draggable: true //убрать потом!!!
-        }
-      );
-      this.myPoint.add(circle);
->>>>>>> 5f8dc5126c78160ce22308edeff5044ca50a721f*/
 	  },
 	  placeGeoObjects() {
 	    this.map.geoObjects.removeAll(); 
